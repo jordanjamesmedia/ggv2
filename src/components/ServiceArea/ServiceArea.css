@@ -1,0 +1,84 @@
+.section-service-area {
+  padding: 6rem 0;
+  background-color: #f8f9fa;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), url('../../assets/images/gc15.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.section-service-area .section-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.section-service-area .section-subtitle {
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.locations-grid {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.location-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.location-item {
+  padding: 0.35rem 0.5rem;
+  transition: all 0.2s ease;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.location-item:hover {
+  background-color: rgba(77, 216, 230, 0.08);
+  transform: translateX(4px);
+}
+
+.location-postcode {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.service-area-map {
+  transition: transform 0.3s ease;
+}
+
+.service-area-map:hover {
+  transform: scale(1.02);
+}
+
+/* Utility Classes */
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mb-8 {
+  margin-bottom: 1.5rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 960px) {
+  .service-area-map {
+    margin-top: 2rem;
+  }
+  
+  .locations-grid {
+    padding: 1rem;
+  }
+  
+  .location-column {
+    gap: 0.25rem;
+  }
+} 
