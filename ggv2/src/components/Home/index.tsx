@@ -18,13 +18,14 @@ export default function Home() {
   }
 
   return (
-    <Box>
+    <Box sx={{ mt: 0 }}>
       {/* Hero Section */}
       <Box 
         sx={{
-          mt: '74px',
+          mt: 0,
           position: 'relative',
-          minHeight: '80vh',
+          minHeight: { xs: 'auto', md: '100vh' },
+          py: { xs: 8, md: 12 },
           display: 'flex',
           alignItems: 'center',
           color: 'white',
@@ -43,7 +44,7 @@ export default function Home() {
         }}
       >
         <Container maxWidth="lg">
-          <Grid container spacing={4} alignItems="center">
+          <Grid container spacing={{ xs: 6, md: 4 }} alignItems="center">
             <Grid item xs={12} md={7} sx={{ textAlign: { xs: 'center', md: 'left' } }}>
               <Typography 
                 variant="h1" 
@@ -74,7 +75,7 @@ export default function Home() {
                 direction={{ xs: 'column', sm: 'row' }}
                 spacing={2}
                 sx={{ 
-                  mb: 6,
+                  mb: { xs: 0, md: 6 },
                   justifyContent: { xs: 'center', md: 'flex-start' }
                 }}
               >
@@ -125,9 +126,10 @@ export default function Home() {
               <Box 
                 sx={{ 
                   bgcolor: 'rgba(255,255,255,0.95)',
-                  p: 4,
+                  p: { xs: 3, sm: 4 },
                   borderRadius: 4,
-                  boxShadow: '0 20px 40px rgba(0,0,0,0.2)'
+                  boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+                  mb: { xs: 4, md: 0 }
                 }}
               >
                 <LeadForm />

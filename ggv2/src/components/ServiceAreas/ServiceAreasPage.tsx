@@ -15,13 +15,13 @@ export default function ServiceAreasPage() {
   )
 
   return (
-    <Box>
+    <Box sx={{ mt: 0 }}>
       {/* Hero Section */}
       <Box 
         sx={{
-          mt: '74px',
           position: 'relative',
-          minHeight: '40vh',
+          minHeight: { xs: 'auto', md: '40vh' },
+          py: { xs: 8, md: 12 },
           display: 'flex',
           alignItems: 'center',
           color: 'white',
@@ -95,17 +95,17 @@ export default function ServiceAreasPage() {
       </Box>
 
       {/* Locations Grid */}
-      <Box sx={{ py: 8, bgcolor: '#f8fafc' }}>
+      <Box sx={{ py: { xs: 2, md: 8 }, bgcolor: '#f8fafc' }}>
         <Container maxWidth="lg">
-          <Grid container spacing={3}>
+          <Grid container spacing={{ xs: 0.5, md: 3 }}>
             {filteredLocations.map((location) => (
-              <Grid item xs={12} sm={6} md={4} lg={3} key={location.id}>
+              <Grid item xs={4} sm={4} md={4} lg={3} key={location.id}>
                 <Paper
                   component={Link}
                   to={`/locations/${location.id}`}
                   sx={{
-                    p: 3,
-                    borderRadius: 4,
+                    p: { xs: 1, md: 3 },
+                    borderRadius: { xs: 1, md: 4 },
                     textDecoration: 'none',
                     display: 'block',
                     transition: 'all 0.3s ease',
@@ -117,28 +117,37 @@ export default function ServiceAreasPage() {
                     }
                   }}
                 >
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                    <LocationOnIcon sx={{ color: '#4DD8E6', fontSize: '2rem' }} />
-                    <Box>
-                      <Typography 
-                        sx={{ 
-                          color: '#2C3E50',
-                          fontWeight: 600,
-                          fontSize: '1.1rem',
-                          mb: 0.5
-                        }}
-                      >
-                        {location.name}
-                      </Typography>
-                      <Typography 
-                        sx={{ 
-                          color: '#5D6D7E',
-                          fontSize: '0.9rem'
-                        }}
-                      >
-                        {location.postcode}
-                      </Typography>
-                    </Box>
+                  <Box sx={{ 
+                    display: 'flex', 
+                    flexDirection: 'column',
+                    alignItems: 'center', 
+                    gap: { xs: 0.25, md: 2 },
+                    textAlign: 'center'
+                  }}>
+                    <Typography 
+                      sx={{ 
+                        color: '#2C3E50',
+                        fontWeight: 600,
+                        fontSize: { xs: '0.7rem', md: '1.1rem' },
+                        lineHeight: { xs: 1.2, md: 1.4 },
+                        mb: { xs: 0, md: 0.5 },
+                        width: '100%',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap'
+                      }}
+                    >
+                      {location.name}
+                    </Typography>
+                    <Typography 
+                      sx={{ 
+                        color: '#5D6D7E',
+                        fontSize: { xs: '0.65rem', md: '0.9rem' },
+                        lineHeight: 1
+                      }}
+                    >
+                      {location.postcode}
+                    </Typography>
                   </Box>
                 </Paper>
               </Grid>

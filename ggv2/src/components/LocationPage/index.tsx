@@ -76,11 +76,12 @@ export default function LocationPage() {
   const backgroundImage = backgroundImages[location.id as keyof typeof backgroundImages] || gc2
 
   return (
-    <Box sx={{ mt: '74px' }}>
+    <Box sx={{ mt: 0 }}>
       {/* Hero Section */}
       <Box 
         sx={{
-          minHeight: '60vh',
+          minHeight: { xs: 'auto', md: '60vh' },
+          py: { xs: 8, md: 12 },
           display: 'flex',
           alignItems: 'center',
           backgroundImage: `url(${backgroundImage})`,
@@ -99,7 +100,7 @@ export default function LocationPage() {
         }}
       >
         <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
-          <Grid container spacing={4} alignItems="center">
+          <Grid container spacing={{ xs: 6, md: 4 }} alignItems="center">
             <Grid item xs={12} md={7}>
               <Typography 
                 variant="h1" 
@@ -107,17 +108,19 @@ export default function LocationPage() {
                   fontSize: { xs: '2.5rem', md: '3.5rem' },
                   fontWeight: 700,
                   color: 'white',
-                  mb: 2
+                  mb: 2,
+                  textAlign: { xs: 'center', md: 'left' }
                 }}
               >
                 Gutter Cleaning {location.name}
               </Typography>
               <Typography 
                 sx={{ 
-                  fontSize: '1.25rem',
+                  fontSize: { xs: '1.1rem', md: '1.25rem' },
                   color: 'white',
                   opacity: 0.9,
-                  mb: 3
+                  mb: 3,
+                  textAlign: { xs: 'center', md: 'left' }
                 }}
               >
                 Professional gutter services in {location.name}, {location.postcode}
@@ -128,9 +131,10 @@ export default function LocationPage() {
                 elevation={0}
                 sx={{ 
                   bgcolor: 'rgba(255,255,255,0.95)',
-                  p: 4,
+                  p: { xs: 3, sm: 4 },
                   borderRadius: 4,
-                  boxShadow: '0 20px 40px rgba(0,0,0,0.2)'
+                  boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+                  mb: { xs: 4, md: 0 }
                 }}
               >
                 <LeadForm />
@@ -239,14 +243,15 @@ export default function LocationPage() {
                     fontSize: '1.5rem',
                     fontWeight: 600,
                     color: '#2C3E50',
-                    mb: 3
+                    mb: 3,
+                    textAlign: { xs: 'center', md: 'left' }
                   }}
                 >
                   We Also Service These Nearby Areas
                 </Typography>
                 <Grid container spacing={2}>
                   {nearbyLocations.map((nearbyLoc) => (
-                    <Grid item xs={12} sm={4} key={nearbyLoc.id}>
+                    <Grid item xs={6} sm={4} key={nearbyLoc.id}>
                       <Link 
                         to={`/locations/${nearbyLoc.id}`}
                         style={{ textDecoration: 'none' }}
@@ -260,32 +265,32 @@ export default function LocationPage() {
                             backdropFilter: 'blur(10px)',
                             border: '1px solid rgba(77, 216, 230, 0.2)',
                             transition: 'all 0.3s ease',
+                            textAlign: 'center',
                             '&:hover': {
-                              transform: 'translateY(-4px)',
-                              boxShadow: '0 12px 48px rgba(77, 216, 230, 0.2)',
+                              transform: 'translateY(-2px)',
+                              boxShadow: '0 8px 24px rgba(77, 216, 230, 0.15)',
                               background: 'linear-gradient(135deg, rgba(77, 216, 230, 0.1) 0%, rgba(77, 216, 230, 0.05) 100%)'
                             }
                           }}
                         >
-                          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+                          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
                             <LocationOnIcon sx={{ color: '#4DD8E6' }} />
-                            <Typography 
-                              sx={{ 
+                            <Box>
+                              <Typography sx={{ 
                                 color: '#2C3E50',
-                                fontWeight: 500
-                              }}
-                            >
-                              {nearbyLoc.name}
-                            </Typography>
+                                fontWeight: 500,
+                                fontSize: { xs: '0.9rem', sm: '1rem' }
+                              }}>
+                                {nearbyLoc.name}
+                              </Typography>
+                              <Typography sx={{ 
+                                color: '#5D6D7E',
+                                fontSize: { xs: '0.8rem', sm: '0.9rem' }
+                              }}>
+                                {nearbyLoc.postcode}
+                              </Typography>
+                            </Box>
                           </Box>
-                          <Typography 
-                            sx={{ 
-                              color: '#5D6D7E',
-                              fontSize: '0.9rem'
-                            }}
-                          >
-                            {nearbyLoc.postcode}
-                          </Typography>
                         </Paper>
                       </Link>
                     </Grid>

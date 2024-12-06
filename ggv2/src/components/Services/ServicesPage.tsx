@@ -13,7 +13,7 @@ const services = [
   {
     id: 'gutter-cleaning',
     title: 'Gutter Cleaning',
-    description: 'Professional removal of leaves, debris, and blockages from your gutters to ensure proper water flow and prevent water damage.',
+    description: 'Professional and thorough cleaning of your gutters to remove leaves, debris, and blockages. We ensure proper water flow and prevent potential water damage to your home.',
     image: gc13,
     features: [
       'Complete debris removal',
@@ -25,23 +25,23 @@ const services = [
     ]
   },
   {
-    id: 'gutter-repairs',
-    title: 'Gutter Repairs',
-    description: 'Expert repair services for damaged, leaking, or sagging gutters to restore proper functionality and protect your home.',
+    id: 'gutter-maintenance',
+    title: 'Gutter Maintenance',
+    description: 'Regular inspection and maintenance service to keep your gutters in optimal condition. We identify and address potential issues before they become major problems.',
     image: gc2,
     features: [
-      'Leak repairs',
-      'Bracket replacement',
-      'Seam sealing',
-      'Slope correction',
-      'Rust treatment',
-      'Quality materials'
+      'Regular inspections',
+      'Preventive cleaning',
+      'Flow testing',
+      'Condition reporting',
+      'Performance optimization',
+      'Seasonal care'
     ]
   },
   {
     id: 'gutter-guard-installation',
     title: 'Gutter Guard Installation',
-    description: 'High-quality gutter guard installation to prevent debris buildup while allowing water to flow freely through your gutters.',
+    description: 'High-quality gutter guard installation to prevent debris buildup while maintaining proper water flow. Reduce cleaning frequency and protect your gutters year-round.',
     image: gc7,
     features: [
       'Premium materials',
@@ -50,48 +50,6 @@ const services = [
       'Reduced maintenance',
       'UV resistant',
       'Long-term warranty'
-    ]
-  },
-  {
-    id: 'commercial-services',
-    title: 'Commercial Services',
-    description: 'Comprehensive gutter maintenance solutions for commercial properties, ensuring proper drainage and protection.',
-    image: gc8,
-    features: [
-      'Regular maintenance',
-      'Emergency services',
-      'Safety compliance',
-      'Insurance coverage',
-      'Flexible scheduling',
-      'Detailed reporting'
-    ]
-  },
-  {
-    id: 'roof-valley-cleaning',
-    title: 'Roof Valley Cleaning',
-    description: 'Thorough cleaning of roof valleys to prevent water damage and extend the life of your roofing system.',
-    image: gc11,
-    features: [
-      'Debris removal',
-      'Moss treatment',
-      'Leak prevention',
-      'Valley inspection',
-      'Damage assessment',
-      'Preventive care'
-    ]
-  },
-  {
-    id: 'maintenance-programs',
-    title: 'Maintenance Programs',
-    description: 'Regular maintenance plans to keep your gutters clean and functioning properly year-round.',
-    image: gc14,
-    features: [
-      'Scheduled cleanings',
-      'Priority service',
-      'Detailed inspections',
-      'Preventive care',
-      'Cost savings',
-      'Peace of mind'
     ]
   }
 ]

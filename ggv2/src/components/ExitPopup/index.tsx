@@ -54,7 +54,7 @@ export default function ExitPopup({ open, onClose }: ExitPopupProps) {
 
         if (data.success) {
           onClose()
-          navigate('/quote')
+          navigate('/thank-you')
         }
       } catch (error) {
         console.error('Form submission error:', error)

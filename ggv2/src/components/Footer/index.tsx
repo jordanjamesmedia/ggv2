@@ -10,6 +10,13 @@ import { Link as RouterLink } from 'react-router-dom'
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
+  const handleScrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   return (
     <Box 
       component="footer" 
@@ -71,19 +78,16 @@ export default function Footer() {
               <Link component={RouterLink} to="/" color="inherit" underline="hover">
                 Home
               </Link>
-              <Link component={RouterLink} to="/#services" color="inherit" underline="hover">
+              <Link component={RouterLink} to="/services" color="inherit" underline="hover">
                 Services
               </Link>
-              <Link component={RouterLink} to="/#about" color="inherit" underline="hover">
-                About Us
+              <Link component={RouterLink} to="/blog" color="inherit" underline="hover">
+                Blog
               </Link>
-              <Link component={RouterLink} to="/#areas" color="inherit" underline="hover">
+              <Link component={RouterLink} to="/locations" color="inherit" underline="hover">
                 Service Areas
               </Link>
-              <Link component={RouterLink} to="/#faq" color="inherit" underline="hover">
-                FAQ
-              </Link>
-              <Link component={RouterLink} to="/#contact" color="inherit" underline="hover">
+              <Link component={RouterLink} to="/quote" color="inherit" underline="hover">
                 Contact
               </Link>
             </Stack>
