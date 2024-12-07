@@ -1,4 +1,4 @@
-import { Box, Container, Typography, Grid, Paper, MenuItem, TextField } from '@mui/material'
+import { Box, Container, Typography, Grid, Paper } from '@mui/material'
 import LeadForm from '../LeadForm'
 import gc14 from '../../assets/images/gc14.jpg'
 import PhoneIcon from '@mui/icons-material/Phone'
@@ -12,16 +12,6 @@ const contactInfo = {
   hours: 'Mon-Sat: 7am - 5pm',
   area: 'Serving the Illawarra region'
 }
-
-const serviceOptions = [
-  'Gutter Cleaning',
-  'Gutter Repairs',
-  'Gutter Guard Installation',
-  'Commercial Services',
-  'Roof Valley Cleaning',
-  'Maintenance Program',
-  'Other'
-]
 
 export default function ContactPage() {
   return (
@@ -109,36 +99,6 @@ export default function ContactPage() {
                 >
                   Fill out the form below and we'll get back to you within 24 hours
                 </Typography>
-                <Box sx={{ mb: 4 }}>
-                  <TextField
-                    select
-                    fullWidth
-                    label="Service Required"
-                    defaultValue=""
-                    sx={{
-                      '& .MuiOutlinedInput-root': {
-                        '&:hover fieldset': {
-                          borderColor: '#4DD8E6',
-                        },
-                        '&.Mui-focused fieldset': {
-                          borderColor: '#4DD8E6',
-                        },
-                      },
-                      '& .MuiInputLabel-root.Mui-focused': {
-                        color: '#4DD8E6',
-                      }
-                    }}
-                  >
-                    <MenuItem value="" disabled>
-                      Select a service
-                    </MenuItem>
-                    {serviceOptions.map((option) => (
-                      <MenuItem key={option} value={option}>
-                        {option}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </Box>
                 <LeadForm />
               </Paper>
             </Grid>

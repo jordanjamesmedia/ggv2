@@ -1,68 +1,71 @@
+import React from 'react'
 import {
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
-  Button,
   Typography,
   IconButton,
+  Box,
   TextField,
-  Box
+  Button,
+  MenuItem
 } from '@mui/material'
 import { Close as CloseIcon } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
-import { useFormik } from 'formik'
+import { Formik, Form, FormikHelpers } from 'formik'
 import * as yup from 'yup'
+import { SERVICE_OPTIONS, ServiceOption } from '../../data/services'
 
 interface ExitPopupProps {
-  open: boolean
-  onClose: () => void
+  open: boolean;
+  onClose: () => void;
+}
+
+interface FormValues {
+  name: string;
+  email: string;
+  phone: string;
+  service: ServiceOption | '';
 }
 
 const validationSchema = yup.object({
   name: yup.string().required('Name is required'),
-  email: yup.string().email('Enter a valid email').required('Email is required'),
-  phone: yup.string().required('Phone number is required')
+  email: yup.string().email('Invalid email address').required('Email is required'),
+  phone: yup.string().required('Phone number is required'),
+  service: yup.string()
 })
 
 export default function ExitPopup({ open, onClose }: ExitPopupProps) {
   const navigate = useNavigate()
 
-  const formik = useFormik({
-    initialValues: {
-      name: '',
-      email: '',
-      phone: ''
-    },
-    validationSchema: validationSchema,
-    onSubmit: async (values, { setSubmitting }) => {
-      try {
-        const response = await fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            access_key: '454855a9-c239-4927-ad3f-f626087fc12a',
-            subject: 'Exit Popup - Discount Request',
-            from_name: 'Gutter Goat Website',
-            ...values
-          })
+  const handleSubmit = async (values: FormValues, { setSubmitting }: FormikHelpers<FormValues>) => {
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: '454855a9-c239-4927-ad3f-f626087fc12a',
+          subject: 'Exit Popup - Discount Request',
+          from_name: 'Gutter Goat Website',
+          ...values
         })
+      })
 
-        const data = await response.json()
+      const data = await response.json()
 
-        if (data.success) {
-          onClose()
-          navigate('/thank-you')
-        }
-      } catch (error) {
-        console.error('Form submission error:', error)
-      } finally {
-        setSubmitting(false)
+      if (data.success) {
+        onClose()
+        navigate('/thanks')
       }
+    } catch (error) {
+      console.error('Form submission error:', error)
+    } finally {
+      setSubmitting(false)
     }
-  })
+  }
 
   return (
     <Dialog 
@@ -93,78 +96,115 @@ export default function ExitPopup({ open, onClose }: ExitPopupProps) {
             sx={{ 
               mb: 3,
               color: '#5D6D7E',
-              fontSize: '1.1rem'
+              fontSize: '1.1rem',
+              textAlign: 'center'
             }}
           >
-            Before you go, would you like to receive a special discount on our gutter cleaning services?
             Sign up now and get 10% off your first service!
           </Typography>
-          <form onSubmit={formik.handleSubmit}>
-            <TextField
-              fullWidth
-              id="name"
-              name="name"
-              label="Name"
-              value={formik.values.name}
-              onChange={formik.handleChange}
-              error={formik.touched.name && Boolean(formik.errors.name)}
-              helperText={formik.touched.name && formik.errors.name}
-              sx={{ mb: 2 }}
-            />
-            <TextField
-              fullWidth
-              id="email"
-              name="email"
-              label="Email"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              error={formik.touched.email && Boolean(formik.errors.email)}
-              helperText={formik.touched.email && formik.errors.email}
-              sx={{ mb: 2 }}
-            />
-            <TextField
-              fullWidth
-              id="phone"
-              name="phone"
-              label="Phone"
-              value={formik.values.phone}
-              onChange={formik.handleChange}
-              error={formik.touched.phone && Boolean(formik.errors.phone)}
-              helperText={formik.touched.phone && formik.errors.phone}
-              sx={{ mb: 3 }}
-            />
-            <DialogActions sx={{ px: 0 }}>
-              <Button 
-                onClick={onClose} 
-                color="inherit"
-                sx={{ 
-                  color: '#5D6D7E',
-                  '&:hover': {
-                    bgcolor: 'rgba(93, 109, 126, 0.1)'
-                  }
-                }}
+          <Formik
+            initialValues={{
+              name: '',
+              email: '',
+              phone: '',
+              service: ''
+            }}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
+            {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
+              <Box 
+                component="form" 
+                onSubmit={handleSubmit}
               >
-                No, thanks
-              </Button>
-              <Button
-                type="submit"
-                variant="contained"
-                disabled={formik.isSubmitting}
-                sx={{
-                  bgcolor: '#4DD8E6',
-                  color: 'white',
-                  py: 1.5,
-                  px: 3,
-                  textTransform: 'none',
-                  '&:hover': {
-                    bgcolor: '#3CC7D5'
-                  }
-                }}
-              >
-                Get My Discount
-              </Button>
-            </DialogActions>
-          </form>
+                <TextField
+                  fullWidth
+                  id="name"
+                  name="name"
+                  label="Name"
+                  value={values.name}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={touched.name && Boolean(errors.name)}
+                  helperText={touched.name && errors.name}
+                  sx={{ mb: 2 }}
+                />
+                <TextField
+                  fullWidth
+                  id="email"
+                  name="email"
+                  label="Email"
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={touched.email && Boolean(errors.email)}
+                  helperText={touched.email && errors.email}
+                  sx={{ mb: 2 }}
+                />
+                <TextField
+                  fullWidth
+                  id="phone"
+                  name="phone"
+                  label="Phone"
+                  value={values.phone}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={touched.phone && Boolean(errors.phone)}
+                  helperText={touched.phone && errors.phone}
+                  sx={{ mb: 2 }}
+                />
+                <TextField
+                  select
+                  fullWidth
+                  id="service"
+                  name="service"
+                  label="Service Required"
+                  value={values.service}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={touched.service && Boolean(errors.service)}
+                  helperText={touched.service && errors.service}
+                  sx={{ mb: 3 }}
+                >
+                  <MenuItem value="" disabled>
+                    Select a service
+                  </MenuItem>
+                  {SERVICE_OPTIONS.map((option) => (
+                    <MenuItem key={option} value={option}>
+                      {option}
+                    </MenuItem>
+                  ))}
+                </TextField>
+                <DialogActions sx={{ px: 0 }}>
+                  <Button 
+                    onClick={onClose} 
+                    color="inherit"
+                    sx={{ 
+                      color: '#5D6D7E',
+                      textTransform: 'none'
+                    }}
+                  >
+                    No thanks
+                  </Button>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    disabled={isSubmitting}
+                    sx={{
+                      bgcolor: '#4DD8E6',
+                      color: 'white',
+                      textTransform: 'none',
+                      '&:hover': {
+                        bgcolor: '#3CC7D5'
+                      }
+                    }}
+                  >
+                    Get My Discount
+                  </Button>
+                </DialogActions>
+              </Box>
+            )}
+          </Formik>
         </Box>
       </DialogContent>
     </Dialog>

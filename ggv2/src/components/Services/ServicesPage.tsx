@@ -1,58 +1,10 @@
+import React from 'react'
 import { Box, Container, Typography, Grid, Paper, Button } from '@mui/material'
 import { Link } from 'react-router-dom'
-import gc2 from '../../assets/images/gc2.jpg'
-import gc7 from '../../assets/images/gc7.jpg'
-import gc8 from '../../assets/images/gc8.jpg'
-import gc11 from '../../assets/images/gc11.jpg'
 import gc13 from '../../assets/images/gc13.jpg'
-import gc14 from '../../assets/images/gc14.jpg'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
-
-const services = [
-  {
-    id: 'gutter-cleaning',
-    title: 'Gutter Cleaning',
-    description: 'Professional and thorough cleaning of your gutters to remove leaves, debris, and blockages. We ensure proper water flow and prevent potential water damage to your home.',
-    image: gc13,
-    features: [
-      'Complete debris removal',
-      'Downspout cleaning',
-      'Gutter flushing',
-      'System inspection',
-      'Before & after photos',
-      'Satisfaction guarantee'
-    ]
-  },
-  {
-    id: 'gutter-maintenance',
-    title: 'Gutter Maintenance',
-    description: 'Regular inspection and maintenance service to keep your gutters in optimal condition. We identify and address potential issues before they become major problems.',
-    image: gc2,
-    features: [
-      'Regular inspections',
-      'Preventive cleaning',
-      'Flow testing',
-      'Condition reporting',
-      'Performance optimization',
-      'Seasonal care'
-    ]
-  },
-  {
-    id: 'gutter-guard-installation',
-    title: 'Gutter Guard Installation',
-    description: 'High-quality gutter guard installation to prevent debris buildup while maintaining proper water flow. Reduce cleaning frequency and protect your gutters year-round.',
-    image: gc7,
-    features: [
-      'Premium materials',
-      'Professional installation',
-      'Debris protection',
-      'Reduced maintenance',
-      'UV resistant',
-      'Long-term warranty'
-    ]
-  }
-]
+import { SERVICES } from '../../data/services'
 
 export default function ServicesPage() {
   return (
@@ -110,7 +62,7 @@ export default function ServicesPage() {
       <Box sx={{ py: 8, bgcolor: '#f8fafc' }}>
         <Container maxWidth="lg">
           <Grid container spacing={4}>
-            {services.map((service) => (
+            {SERVICES.map((service) => (
               <Grid item xs={12} md={6} key={service.id}>
                 <Paper
                   sx={{

@@ -1,3 +1,4 @@
+import React from 'react'
 import { Box, Container, Typography, Button } from '@mui/material'
 import { Link } from 'react-router-dom'
 import gc14 from '../../assets/images/gc14.jpg'
@@ -8,16 +9,18 @@ import { useEffect } from 'react'
 // Declare gtag as a global function
 declare global {
   interface Window {
-    gtag: (...args: any[]) => void;
+    gtag?: (...args: any[]) => void;
   }
 }
 
 export default function ThankYouPage() {
   useEffect(() => {
-    // Fire the conversion event when component mounts
-    window.gtag('event', 'conversion', {
-      'send_to': 'AW-16797354549/sADJCML-qvIZELWUzck-'
-    });
+    // Only fire the conversion event if gtag exists
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'conversion', {
+        'send_to': 'AW-16797354549/sADJCML-qvIZELWUzck-'
+      });
+    }
   }, []);
 
   return (

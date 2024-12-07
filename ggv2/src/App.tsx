@@ -1,7 +1,8 @@
+import React from 'react'
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ThemeProvider } from '@mui/material/styles'
-import { CssBaseline, Box, GlobalStyles } from '@mui/material'
+import CssBaseline from '@mui/material/CssBaseline'
 import theme from './theme'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -14,29 +15,8 @@ import ServicesPage from './components/Services/ServicesPage'
 import ContactPage from './components/Contact/ContactPage'
 import ThankYouPage from './components/ThankYou/ThankYouPage'
 import ExitPopup from './components/ExitPopup'
-import ScrollToTop from './components/ScrollToTop'
-
-const globalStyles = {
-  '*': {
-    margin: 0,
-    padding: 0,
-    boxSizing: 'border-box',
-  },
-  'html, body': {
-    margin: 0,
-    padding: 0,
-    minHeight: '100vh',
-    width: '100%',
-    overflow: 'auto'
-  },
-  '#root': {
-    minHeight: '100vh',
-    display: 'flex',
-    flexDirection: 'column',
-    margin: 0,
-    padding: 0
-  }
-}
+import MobileCTA from './components/MobileCTA'
+import { Box } from '@mui/material'
 
 function App() {
   const [showExitPopup, setShowExitPopup] = useState(false)
@@ -68,30 +48,10 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <GlobalStyles styles={globalStyles} />
       <Router>
-        <ScrollToTop />
-        <Box 
-          sx={{ 
-            display: 'flex', 
-            flexDirection: 'column', 
-            minHeight: '100vh', 
-            margin: 0, 
-            padding: 0,
-            position: 'relative'
-          }}
-        >
+        <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
           <Navbar />
-          <Box 
-            component="main" 
-            sx={{ 
-              flexGrow: 1, 
-              margin: 0, 
-              padding: 0,
-              display: 'flex',
-              flexDirection: 'column'
-            }}
-          >
+          <Box component="main" sx={{ flex: 1 }}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/services" element={<ServicesPage />} />
@@ -105,6 +65,7 @@ function App() {
             </Routes>
           </Box>
           <Footer />
+          <MobileCTA />
           <ExitPopup open={showExitPopup} onClose={handleClosePopup} />
         </Box>
       </Router>
@@ -113,4 +74,3 @@ function App() {
 }
 
 export default App
-// Build: 2024-12-06 23:15

@@ -1,29 +1,9 @@
+import React from 'react'
 import { Box, Container, Typography, Grid, Card, CardContent, CardMedia, Divider } from '@mui/material'
-import gc1 from '../../assets/images/gc1.png'
-import gc2 from '../../assets/images/gc2.jpg'
-import gc3 from '../../assets/images/gc3.jpg'
-import gc4 from '../../assets/images/gc4.jpg'
+import { SERVICES } from '../../data/services'
 import WaterDamageIcon from '@mui/icons-material/WaterDamage'
 import PestControlIcon from '@mui/icons-material/PestControl'
 import FoundationIcon from '@mui/icons-material/Foundation'
-
-const services = [
-  {
-    title: 'Gutter Cleaning',
-    description: 'Thorough cleaning and removal of leaves, debris, and blockages to ensure proper water flow and prevent damage to your home.',
-    image: gc1
-  },
-  {
-    title: 'Gutter Maintenance',
-    description: 'Regular inspection and maintenance to keep your gutters functioning properly, including cleaning and checking for potential issues.',
-    image: gc2
-  },
-  {
-    title: 'Gutter Guard Installation',
-    description: 'High-quality gutter guard installation to prevent debris buildup and reduce the frequency of cleanings while maintaining proper water flow.',
-    image: gc3
-  }
-]
 
 const benefits = [
   {
@@ -72,8 +52,8 @@ export default function Services() {
         </Box>
 
         <Grid container spacing={4} sx={{ mb: 8 }}>
-          {services.map((service, index) => (
-            <Grid item xs={12} md={4} key={index}>
+          {SERVICES.map((service) => (
+            <Grid item xs={12} md={4} key={service.id}>
               <Card 
                 sx={{ 
                   height: '100%',

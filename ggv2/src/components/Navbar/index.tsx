@@ -87,7 +87,7 @@ export default function Navbar() {
             sx={{ 
               height: scrolled ? 64 : 80,
               px: scrolled ? { xs: 2, md: 4 } : { xs: 2, md: 6 },
-              mx: scrolled ? { xs: 0, md: 2 } : 0,
+              mx: 'auto',
               my: scrolled ? 1 : 0,
               bgcolor: '#1B4B5A',
               borderRadius: scrolled ? 2 : 0,
@@ -96,7 +96,8 @@ export default function Navbar() {
               overflow: 'hidden',
               transform: `scale(${scrolled ? '0.98' : '1'})`,
               opacity: scrolled ? 0.98 : 1,
-              transition: `${transition.transform}, ${transition.opacity}`
+              transition: `${transition.transform}, ${transition.opacity}`,
+              width: scrolled ? '100%' : 'auto'
             }}
           >
             {/* Desktop Logo */}
