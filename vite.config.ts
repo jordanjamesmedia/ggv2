@@ -16,5 +16,9 @@ export default defineConfig({
     }
   },
   root: '.',
-  base: '/'
+  base: '/',
+  build: {
+    outDir: 'dist',
+    emptyOutDir: true
+  }
 })
