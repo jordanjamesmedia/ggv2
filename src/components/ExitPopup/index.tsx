@@ -73,6 +73,18 @@ export default function ExitPopup({ open, onClose }: ExitPopupProps) {
       onClose={onClose}
       maxWidth="sm"
       fullWidth
+      sx={{
+        '& .MuiDialog-container': {
+          alignItems: 'center',
+          justifyContent: 'center',
+        },
+        '& .MuiDialog-paper': {
+          margin: { xs: 2, sm: 4 },
+          width: '100%',
+          maxWidth: 'sm',
+          borderRadius: 2
+        }
+      }}
     >
       <DialogTitle>
         <Typography variant="h5" component="div" sx={{ pr: 4 }}>

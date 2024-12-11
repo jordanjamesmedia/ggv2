@@ -6,7 +6,7 @@ import PersonIcon from '@mui/icons-material/Person'
 
 export default function BlogList() {
   return (
-    <Box sx={{ mt: '74px', py: 8, bgcolor: '#f8fafc' }}>
+    <Box sx={{ py: 8, bgcolor: '#f8fafc' }}>
       <Container maxWidth="lg">
         <Typography 
           variant="h1" 

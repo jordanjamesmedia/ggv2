@@ -3,7 +3,13 @@ import { Link as RouterLink } from 'react-router-dom'
 
 export default function CTA() {
   return (
-    <Box sx={{ py: 8, bgcolor: '#4DD8E6' }}>
+    <Box sx={{ 
+      py: 8, 
+      bgcolor: '#4DD8E6',
+      visibility: { xs: 'hidden', md: 'visible' },
+      display: { xs: 'none', md: 'block' },
+      height: { xs: 0, md: 'auto' }
+    }}>
       <Container maxWidth="lg">
         <Box sx={{ textAlign: 'center', color: 'white' }}>
           <Typography 

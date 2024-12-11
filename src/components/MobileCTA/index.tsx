@@ -2,8 +2,28 @@ import { Box, Button } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
 import PhoneIcon from '@mui/icons-material/Phone'
 import RequestQuoteIcon from '@mui/icons-material/RequestQuote'
+import { useState, useEffect } from 'react'
 
 export default function MobileCTA() {
+  const [showButtons, setShowButtons] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY
+      const windowHeight = window.innerHeight
+      const showThreshold = windowHeight * 0.3 // Show after 30% of viewport height
+
+      setShowButtons(scrollPosition > showThreshold)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    handleScroll() // Check initial position
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  if (!showButtons) return null
+
   return (
     <Box
       sx={{
@@ -16,7 +36,9 @@ export default function MobileCTA() {
         p: 2,
         display: { xs: 'flex', md: 'none' },
         gap: 2,
-        zIndex: 1000
+        zIndex: 1000,
+        transition: 'transform 0.3s ease-in-out',
+        transform: showButtons ? 'translateY(0)' : 'translateY(100%)'
       }}
     >
       <Button

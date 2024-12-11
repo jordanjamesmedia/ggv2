@@ -19,7 +19,6 @@ export default function ContactPage() {
       {/* Hero Section */}
       <Box 
         sx={{
-          mt: '74px',
           position: 'relative',
           minHeight: '40vh',
           display: 'flex',

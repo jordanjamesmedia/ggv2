@@ -28,7 +28,6 @@ export default function ThankYouPage() {
       {/* Hero Section */}
       <Box 
         sx={{
-          mt: '74px',
           position: 'relative',
           minHeight: '100vh',
           display: 'flex',

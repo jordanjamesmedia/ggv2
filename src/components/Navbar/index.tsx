@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
-import { AppBar, Box, Container, IconButton, Link, Menu, MenuItem, Toolbar, Button, Typography, Stack } from '@mui/material'
+import { AppBar, Box, Container, IconButton, Link, Menu, MenuItem, Toolbar, Button, Typography } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
-import PhoneIcon from '@mui/icons-material/Phone'
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
 import logoSquare from '../../assets/images/logo-square.png'
 
 const pages = [
@@ -39,65 +37,29 @@ export default function Navbar() {
     setAnchorElNav(null)
   }
 
-  const handleCallClick = () => {
-    window.location.href = 'tel:0420747772'
-  }
-
-  // Using a spring-like easing curve for a more dynamic feel
-  const transition = {
-    transform: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
-    opacity: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-    sizing: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)'
-  }
-
   return (
-    <Box sx={{ height: scrolled ? 64 : 80, position: 'relative', margin: 0, padding: 0, mb: -8 }}>
+    <Box sx={{ height: scrolled ? 64 : 80 }}>
       <AppBar 
         position="fixed" 
         elevation={0}
         sx={{ 
           bgcolor: scrolled ? 'transparent' : '#1B4B5A',
-          borderRadius: 0,
-          boxShadow: 'none',
-          border: 'none',
-          top: 0,
-          left: 0,
-          right: 0,
-          margin: 0,
-          padding: 0,
-          transform: `translateY(0)`,
-          transition: transition.transform,
-          zIndex: 1200
+          transition: 'all 0.3s ease',
+          boxShadow: 'none'
         }}
       >
-        <Container 
-          maxWidth={scrolled ? "lg" : false}
-          disableGutters={!scrolled}
-          sx={{
-            px: scrolled ? { xs: 2, md: 3 } : 0,
-            transition: transition.sizing,
-            border: 'none',
-            bgcolor: 'transparent',
-            margin: 0,
-            padding: 0
-          }}
-        >
+        <Container maxWidth="lg">
           <Toolbar 
             disableGutters 
             sx={{ 
               height: scrolled ? 64 : 80,
-              px: scrolled ? { xs: 2, md: 4 } : { xs: 2, md: 6 },
-              mx: 'auto',
-              my: scrolled ? 1 : 0,
+              px: { xs: 2, md: 4 },
+              mx: scrolled ? 2 : 0,
+              mt: scrolled ? 2 : 0,
               bgcolor: '#1B4B5A',
               borderRadius: scrolled ? 2 : 0,
               boxShadow: scrolled ? '0 4px 20px rgba(0, 0, 0, 0.15)' : 'none',
-              border: 'none',
-              overflow: 'hidden',
-              transform: `scale(${scrolled ? '0.98' : '1'})`,
-              opacity: scrolled ? 0.98 : 1,
-              transition: `${transition.transform}, ${transition.opacity}`,
-              width: scrolled ? '100%' : 'auto'
+              transition: 'all 0.3s ease'
             }}
           >
             {/* Desktop Logo */}
@@ -110,8 +72,7 @@ export default function Navbar() {
                   sx={{
                     height: scrolled ? 40 : 45,
                     width: 'auto',
-                    transform: `scale(${scrolled ? '0.95' : '1'})`,
-                    transition: transition.transform
+                    transition: 'all 0.3s ease'
                   }}
                 />
                 <Typography
@@ -120,8 +81,7 @@ export default function Navbar() {
                     fontWeight: 600,
                     color: 'white',
                     fontSize: scrolled ? '1.25rem' : '1.4rem',
-                    transform: `translateX(${scrolled ? '-2px' : '0'})`,
-                    transition: transition.transform
+                    transition: 'all 0.3s ease'
                   }}
                 >
                   Gutter Goat
@@ -159,7 +119,7 @@ export default function Navbar() {
                   '& .MuiPaper-root': {
                     bgcolor: '#1B4B5A',
                     boxShadow: '0 4px 20px rgba(27, 75, 90, 0.2)',
-                    borderRadius: 0,
+                    borderRadius: 2,
                     mt: 1
                   }
                 }}
@@ -193,8 +153,7 @@ export default function Navbar() {
                   sx={{
                     height: scrolled ? 32 : 35,
                     width: 'auto',
-                    transform: `scale(${scrolled ? '0.95' : '1'})`,
-                    transition: transition.transform
+                    transition: 'all 0.3s ease'
                   }}
                 />
                 <Typography
@@ -203,8 +162,7 @@ export default function Navbar() {
                     fontWeight: 600,
                     color: 'white',
                     fontSize: scrolled ? '1rem' : '1.1rem',
-                    transform: `translateX(${scrolled ? '-1px' : '0'})`,
-                    transition: transition.transform
+                    transition: 'all 0.3s ease'
                   }}
                 >
                   Gutter Goat
@@ -231,8 +189,7 @@ export default function Navbar() {
                     textDecoration: 'none',
                     fontSize: scrolled ? '0.95rem' : '1rem',
                     fontWeight: 500,
-                    transform: `translateY(${scrolled ? '-1px' : '0'})`,
-                    transition: transition.transform,
+                    transition: 'all 0.3s ease',
                     '&:hover': {
                       color: '#4DD8E6'
                     }
@@ -251,18 +208,14 @@ export default function Navbar() {
                 variant="contained"
                 sx={{
                   bgcolor: '#4DD8E6',
-                  color: '#1B4B5A',
-                  px: scrolled ? 2.5 : 3,
-                  py: scrolled ? 0.75 : 1,
+                  color: 'white',
+                  px: 3,
+                  py: 1,
+                  fontSize: '0.95rem',
                   textTransform: 'none',
-                  fontSize: scrolled ? '0.95rem' : '1rem',
-                  fontWeight: 600,
-                  borderRadius: 0,
-                  transform: `scale(${scrolled ? '0.98' : '1'})`,
-                  transition: transition.transform,
+                  transition: 'all 0.3s ease',
                   '&:hover': {
-                    bgcolor: '#3CC7D5',
-                    transform: `scale(${scrolled ? '1.02' : '1.04'})`
+                    bgcolor: '#3CC7D5'
                   }
                 }}
               >
@@ -272,87 +225,6 @@ export default function Navbar() {
           </Toolbar>
         </Container>
       </AppBar>
-
-      {/* Mobile CTA Bar */}
-      <Box
-        sx={{
-          position: 'fixed',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          margin: 0,
-          transform: `translateY(${scrolled ? '0' : '100%'})`,
-          transition: 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
-          bgcolor: '#1B4B5A',
-          borderTop: '1px solid rgba(255,255,255,0.1)',
-          zIndex: 1100,
-          display: { xs: 'block', md: 'none' }
-        }}
-      >
-        <Container maxWidth="lg" disableGutters>
-          <Stack
-            direction="row"
-            spacing={1}
-            sx={{
-              p: 1.5,
-              px: 2
-            }}
-          >
-            <Button
-              onClick={handleCallClick}
-              variant="outlined"
-              size="small"
-              startIcon={<PhoneIcon />}
-              sx={{
-                flex: 1,
-                color: 'white',
-                borderColor: 'rgba(255,255,255,0.3)',
-                textTransform: 'none',
-                fontSize: '0.85rem',
-                py: 0.75,
-                '&:hover': {
-                  borderColor: 'white',
-                  bgcolor: 'rgba(255,255,255,0.1)'
-                }
-              }}
-            >
-              Call Now
-            </Button>
-            <Button
-              component={RouterLink}
-              to="/quote"
-              variant="contained"
-              size="small"
-              endIcon={<ArrowUpwardIcon />}
-              sx={{
-                flex: 1,
-                bgcolor: '#4DD8E6',
-                color: '#1B4B5A',
-                textTransform: 'none',
-                fontSize: '0.85rem',
-                py: 0.75,
-                fontWeight: 600,
-                '&:hover': {
-                  bgcolor: '#3CC7D5'
-                }
-              }}
-            >
-              Get Free Quote
-            </Button>
-          </Stack>
-        </Container>
-      </Box>
-
-      {/* Bottom spacer for mobile CTA */}
-      <Box 
-        sx={{ 
-          height: scrolled ? '64px' : 0,
-          transition: 'height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
-          display: { xs: 'block', md: 'none' }
-        }} 
-      />
-
-      <Box sx={{ height: { xs: scrolled ? 80 : 80, md: scrolled ? 96 : 80 } }} />
     </Box>
   )
 } 

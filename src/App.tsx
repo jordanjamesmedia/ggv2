@@ -16,6 +16,7 @@ import ContactPage from './components/Contact/ContactPage'
 import ThankYouPage from './components/ThankYou/ThankYouPage'
 import ExitPopup from './components/ExitPopup'
 import MobileCTA from './components/MobileCTA'
+import ScrollToTop from './components/ScrollToTop'
 import { Box } from '@mui/material'
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
+        <ScrollToTop />
         <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
           <Navbar />
           <Box component="main" sx={{ flex: 1 }}>
