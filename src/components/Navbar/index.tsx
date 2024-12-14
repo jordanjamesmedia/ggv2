@@ -43,23 +43,27 @@ export default function Navbar() {
         position="fixed" 
         elevation={0}
         sx={{ 
-          bgcolor: scrolled ? 'transparent' : '#1B4B5A',
-          transition: 'all 0.3s ease',
-          boxShadow: 'none'
+          bgcolor: 'transparent',
+          transition: 'all 0.3s ease-in-out',
+          boxShadow: 'none',
+          borderBottom: 'none',
+          width: '100%'
         }}
       >
-        <Container maxWidth="lg">
+        <Container maxWidth={scrolled ? "lg" : false} disableGutters={!scrolled}>
           <Toolbar 
             disableGutters 
             sx={{ 
               height: scrolled ? 64 : 80,
               px: { xs: 2, md: 4 },
-              mx: scrolled ? 2 : 0,
+              mx: scrolled ? { xs: 2, md: 2 } : 0,
               mt: scrolled ? 2 : 0,
               bgcolor: '#1B4B5A',
               borderRadius: scrolled ? 2 : 0,
               boxShadow: scrolled ? '0 4px 20px rgba(0, 0, 0, 0.15)' : 'none',
-              transition: 'all 0.3s ease'
+              transition: 'all 0.3s ease-in-out',
+              border: 'none',
+              width: '100%'
             }}
           >
             {/* Desktop Logo */}

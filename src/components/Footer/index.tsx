@@ -1,21 +1,9 @@
-import { Container, Grid, Typography, Box, Link, IconButton, Stack } from '@mui/material'
-import FacebookIcon from '@mui/icons-material/Facebook'
-import InstagramIcon from '@mui/icons-material/Instagram'
-import LinkedInIcon from '@mui/icons-material/LinkedIn'
-import PhoneIcon from '@mui/icons-material/Phone'
-import EmailIcon from '@mui/icons-material/Email'
-import LocationOnIcon from '@mui/icons-material/LocationOn'
+import React from 'react'
+import { Box, Container, Grid, Typography, Link } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
-
-  const handleScrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
 
   return (
     <Box 
@@ -47,110 +35,102 @@ export default function Footer() {
                 Reliable, efficient, and fully insured.
               </Typography>
             </Box>
-            <Stack spacing={2}>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <PhoneIcon sx={{ color: 'primary.main' }} />
-                <Link href="tel:0497347752" color="inherit" underline="hover">
-                  0497 347 752
-                </Link>
-              </Box>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <EmailIcon sx={{ color: 'primary.main' }} />
-                <Link href="mailto:info@guttergoat.com.au" color="inherit" underline="hover">
-                  info@guttergoat.com.au
-                </Link>
-              </Box>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <LocationOnIcon sx={{ color: 'primary.main' }} />
-                <Typography variant="body2">
-                  Wollongong, NSW 2500
-                </Typography>
-              </Box>
-            </Stack>
           </Grid>
 
           {/* Quick Links */}
           <Grid item xs={12} sm={6} md={4}>
-            <Typography variant="h6" sx={{ mb: 3, color: 'primary.main' }}>
-              Quick Links
-            </Typography>
-            <Stack spacing={2} alignItems={{ xs: 'center', sm: 'flex-start' }}>
-              <Link component={RouterLink} to="/" color="inherit" underline="hover">
+            <Typography variant="h6" sx={{ mb: 3 }}>Quick Links</Typography>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+              <Link 
+                component={RouterLink} 
+                to="/"
+                sx={{ 
+                  color: 'rgba(255, 255, 255, 0.8)',
+                  textDecoration: 'none',
+                  '&:hover': { color: '#4DD8E6' }
+                }}
+              >
                 Home
               </Link>
-              <Link component={RouterLink} to="/services" color="inherit" underline="hover">
+              <Link 
+                component={RouterLink} 
+                to="/services"
+                sx={{ 
+                  color: 'rgba(255, 255, 255, 0.8)',
+                  textDecoration: 'none',
+                  '&:hover': { color: '#4DD8E6' }
+                }}
+              >
                 Services
               </Link>
-              <Link component={RouterLink} to="/blog" color="inherit" underline="hover">
-                Blog
-              </Link>
-              <Link component={RouterLink} to="/locations" color="inherit" underline="hover">
+              <Link 
+                component={RouterLink} 
+                to="/locations"
+                sx={{ 
+                  color: 'rgba(255, 255, 255, 0.8)',
+                  textDecoration: 'none',
+                  '&:hover': { color: '#4DD8E6' }
+                }}
+              >
                 Service Areas
               </Link>
-              <Link component={RouterLink} to="/quote" color="inherit" underline="hover">
-                Contact
+              <Link 
+                component={RouterLink} 
+                to="/quote"
+                sx={{ 
+                  color: 'rgba(255, 255, 255, 0.8)',
+                  textDecoration: 'none',
+                  '&:hover': { color: '#4DD8E6' }
+                }}
+              >
+                Get a Quote
               </Link>
-            </Stack>
+            </Box>
           </Grid>
 
-          {/* Connect With Us */}
+          {/* Legal Links */}
           <Grid item xs={12} sm={6} md={4}>
-            <Box sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
-              <Typography variant="h6" sx={{ mb: 3, color: 'primary.main' }}>
-                Connect With Us
-              </Typography>
-              <Typography variant="body2" sx={{ mb: 3, color: 'rgba(255, 255, 255, 0.8)' }}>
-                Follow us on social media for tips, updates, and special offers
-              </Typography>
-              <Stack 
-                direction="row" 
-                spacing={2} 
-                justifyContent={{ xs: 'center', sm: 'flex-start' }}
+            <Typography variant="h6" sx={{ mb: 3 }}>Legal</Typography>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+              <Link 
+                component={RouterLink} 
+                to="/privacy"
+                sx={{ 
+                  color: 'rgba(255, 255, 255, 0.8)',
+                  textDecoration: 'none',
+                  '&:hover': { color: '#4DD8E6' }
+                }}
               >
-                <IconButton 
-                  href="https://facebook.com" 
-                  target="_blank"
-                  sx={{ 
-                    color: 'white',
-                    '&:hover': { color: 'primary.main' }
-                  }}
-                >
-                  <FacebookIcon />
-                </IconButton>
-                <IconButton 
-                  href="https://instagram.com" 
-                  target="_blank"
-                  sx={{ 
-                    color: 'white',
-                    '&:hover': { color: 'primary.main' }
-                  }}
-                >
-                  <InstagramIcon />
-                </IconButton>
-                <IconButton 
-                  href="https://linkedin.com" 
-                  target="_blank"
-                  sx={{ 
-                    color: 'white',
-                    '&:hover': { color: 'primary.main' }
-                  }}
-                >
-                  <LinkedInIcon />
-                </IconButton>
-              </Stack>
+                Privacy Policy
+              </Link>
+              <Link 
+                component="a"
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault()
+                  localStorage.removeItem('cookieConsent')
+                  window.location.reload()
+                }}
+                sx={{ 
+                  color: 'rgba(255, 255, 255, 0.8)',
+                  textDecoration: 'none',
+                  cursor: 'pointer',
+                  '&:hover': { color: '#4DD8E6' }
+                }}
+              >
+                Cookie Preferences
+              </Link>
             </Box>
           </Grid>
         </Grid>
 
-        {/* Bottom Bar */}
-        <Box 
-          sx={{ 
-            mt: 8,
-            pt: 3,
-            borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-            textAlign: 'center'
-          }}
-        >
+        {/* Copyright */}
+        <Box sx={{ 
+          mt: 6, 
+          pt: 3, 
+          borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+          textAlign: 'center'
+        }}>
           <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.6)' }}>
             © {currentYear} Gutter Goat. All rights reserved.
           </Typography>

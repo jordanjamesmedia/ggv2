@@ -1,5 +1,4 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -14,38 +13,13 @@ import ServiceAreasPage from './components/ServiceAreas/ServiceAreasPage'
 import ServicesPage from './components/Services/ServicesPage'
 import ContactPage from './components/Contact/ContactPage'
 import ThankYouPage from './components/ThankYou/ThankYouPage'
-import ExitPopup from './components/ExitPopup'
+import PrivacyPage from './components/Privacy/PrivacyPage'
+import CookieConsent from './components/CookieConsent'
 import MobileCTA from './components/MobileCTA'
 import ScrollToTop from './components/ScrollToTop'
 import { Box } from '@mui/material'
 
 function App() {
-  const [showExitPopup, setShowExitPopup] = useState(false)
-
-  const handleExitIntent = (e: MouseEvent) => {
-    if (e.clientY <= 0) {
-      const hasShownPopup = localStorage.getItem('hasShownExitPopup')
-      if (!hasShownPopup) {
-        setShowExitPopup(true)
-      }
-    }
-  }
-
-  const handleClosePopup = () => {
-    setShowExitPopup(false)
-    localStorage.setItem('hasShownExitPopup', 'true')
-  }
-
-  useEffect(() => {
-    const hasShownPopup = localStorage.getItem('hasShownExitPopup')
-    if (!hasShownPopup) {
-      document.addEventListener('mouseleave', handleExitIntent)
-      return () => {
-        document.removeEventListener('mouseleave', handleExitIntent)
-      }
-    }
-  }, [])
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -64,11 +38,12 @@ function App() {
               <Route path="/quote" element={<ContactPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/thanks" element={<ThankYouPage />} />
+              <Route path="/privacy" element={<PrivacyPage />} />
             </Routes>
           </Box>
           <Footer />
           <MobileCTA />
-          <ExitPopup open={showExitPopup} onClose={handleClosePopup} />
+          <CookieConsent />
         </Box>
       </Router>
     </ThemeProvider>

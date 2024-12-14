@@ -14,7 +14,24 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'AW-16797354549');
+      
+      // Set default consent to 'denied'
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied'
+      });
+
+      // Initialize with consent mode
+      gtag('config', 'AW-16797354549', {
+        'anonymize_ip': true
+      });
+
+      // Check for existing consent
+      const cookieConsent = localStorage.getItem('cookieConsent');
+      if (cookieConsent === 'accepted') {
+        gtag('consent', 'update', {
+          'analytics_storage': 'granted'
+        });
+      }
     </script>
   </head>
   <body>
