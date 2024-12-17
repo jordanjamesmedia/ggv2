@@ -1,0 +1,11 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap locations
+Sitemap: https://guttergoat.com/sitemap.xml
+Sitemap: https://guttergoat.com/sitemap.xml.gz
+
+# Disallow admin and api routes
+Disallow: /admin/
+Disallow: /api/ 

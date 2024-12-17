@@ -27,7 +27,16 @@ function escapeXml(unsafe) {
  * @throws {Error} If the route is invalid
  */
 function validateRoute(route) {
-  if (route.priority < 0 || route.priority > 1) {
+  if (!route.path || typeof route.path !== 'string') {
+    throw new Error('Route path must be a non-empty string');
+  }
+  if (!route.changefreq || typeof route.changefreq !== 'string') {
+    throw new Error('Route changefreq must be a non-empty string');
+  }
+  if (!route.lastmod || typeof route.lastmod !== 'string') {
+    throw new Error('Route lastmod must be a non-empty string');
+  }
+  if (typeof route.priority !== 'number' || route.priority < 0 || route.priority > 1) {
     throw new Error(`Invalid priority ${route.priority} for route ${route.path}`);
   }
 }
@@ -78,6 +87,11 @@ async function generateSitemap() {
     const routes = await scanRoutes();
     console.log(`Found ${routes.length} routes`);
 
+    // Validate routes
+    for (const route of routes) {
+      validateRoute(route);
+    }
+
     // Generate sitemap XML
     console.log('Generating sitemap XML...');
     const sitemapXML = generateSitemapXML(routes);
@@ -94,7 +108,7 @@ async function generateSitemap() {
     // Write uncompressed sitemap
     const sitemapPath = path.join(publicDir, 'sitemap.xml');
     console.log(`Writing uncompressed sitemap to: ${sitemapPath}`);
-    fs.writeFileSync(sitemapPath, sitemapXML);
+    fs.writeFileSync(sitemapPath, sitemapXML, 'utf-8');
 
     // Create compressed version
     console.log('Compressing sitemap...');

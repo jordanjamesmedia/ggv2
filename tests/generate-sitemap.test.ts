@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import type { Stats } from 'fs';
+import type { Stats, PathLike } from 'fs';
 import { XMLParser } from 'fast-xml-parser';
 
 // Mock modules
@@ -63,6 +63,13 @@ import * as path from 'path';
 import * as zlib from 'zlib';
 import { generateSitemap } from '../scripts/generate-sitemap.cjs';
 
+// Type assertions for mocked functions
+const mockedExistsSync = fs.existsSync as unknown as ReturnType<typeof vi.fn>;
+const mockedMkdirSync = fs.mkdirSync as unknown as ReturnType<typeof vi.fn>;
+const mockedWriteFileSync = fs.writeFileSync as unknown as ReturnType<typeof vi.fn>;
+const mockedStatSync = fs.statSync as unknown as ReturnType<typeof vi.fn>;
+const mockedGzipSync = zlib.gzipSync as unknown as ReturnType<typeof vi.fn>;
+
 describe('Sitemap Generator', () => {
   const currentDate = new Date().toISOString().split('T')[0];
   const mockRoutes = [
@@ -83,22 +90,22 @@ describe('Sitemap Generator', () => {
   beforeEach(() => {
     vi.resetAllMocks();
     mockScanRoutes.mockResolvedValue(mockRoutes);
-    (fs.existsSync as any).mockReturnValue(true);
-    (fs.mkdirSync as any).mockImplementation(() => undefined);
-    (fs.writeFileSync as any).mockImplementation(() => undefined);
-    (fs.statSync as any).mockReturnValue({
+    mockedExistsSync.mockReturnValue(true);
+    mockedMkdirSync.mockImplementation(() => undefined);
+    mockedWriteFileSync.mockImplementation(() => undefined);
+    mockedStatSync.mockReturnValue({
       size: 1000,
       mtime: new Date()
     } as Stats);
 
     // Mock path resolution
-    (path.resolve as any).mockImplementation((...args: string[]) => args.join('/'));
-    (path.join as any).mockImplementation((...args: string[]) => args.join('/'));
-    (path.basename as any).mockImplementation((p: string) => p.split('/').pop());
-    (path.dirname as any).mockImplementation((p: string) => p.split('/').slice(0, -1).join('/'));
+    (path.resolve as ReturnType<typeof vi.fn>).mockImplementation((...args: string[]) => args.join('/'));
+    (path.join as ReturnType<typeof vi.fn>).mockImplementation((...args: string[]) => args.join('/'));
+    (path.basename as ReturnType<typeof vi.fn>).mockImplementation((p: string) => p.split('/').pop());
+    (path.dirname as ReturnType<typeof vi.fn>).mockImplementation((p: string) => p.split('/').slice(0, -1).join('/'));
 
     // Mock zlib compression
-    (zlib.gzipSync as any).mockImplementation((data: string | Buffer) => Buffer.from(data));
+    mockedGzipSync.mockImplementation((data: string | Buffer) => Buffer.from(data));
   });
 
   afterEach(() => {
@@ -106,10 +113,13 @@ describe('Sitemap Generator', () => {
   });
 
   it('should generate a valid sitemap XML file', async () => {
+    mockedExistsSync.mockReturnValue(true);
+    mockedWriteFileSync.mockImplementation(() => undefined);
+
     await generateSitemap();
 
-    expect(fs.writeFileSync).toHaveBeenCalledTimes(2); // Once for XML, once for gzip
-    const xmlContent = (fs.writeFileSync as any).mock.calls[0][1] as string;
+    expect(mockedWriteFileSync).toHaveBeenCalledTimes(2); // Once for XML, once for gzip
+    const xmlContent = mockedWriteFileSync.mock.calls[0][1] as string;
 
     // Verify XML declaration and root element
     expect(xmlContent).toMatch(/^<\?xml version="1\.0" encoding="UTF-8"\?>/);
@@ -134,11 +144,12 @@ describe('Sitemap Generator', () => {
   });
 
   it('should create the public directory if it does not exist', async () => {
-    (fs.existsSync as any).mockReturnValue(false);
+    mockedExistsSync.mockReturnValue(false);
+    mockedMkdirSync.mockImplementation(() => undefined);
 
     await generateSitemap();
 
-    expect(fs.mkdirSync).toHaveBeenCalledWith(
+    expect(mockedMkdirSync).toHaveBeenCalledWith(
       expect.stringContaining('public'),
       { recursive: true }
     );
@@ -146,6 +157,7 @@ describe('Sitemap Generator', () => {
 
   it('should handle errors during sitemap generation', async () => {
     mockScanRoutes.mockRejectedValue(new Error('Failed to scan routes'));
+    mockedExistsSync.mockReturnValue(true);
 
     await expect(generateSitemap()).rejects.toThrow('Failed to scan routes');
   });
@@ -159,10 +171,12 @@ describe('Sitemap Generator', () => {
         lastmod: currentDate
       }
     ]);
+    mockedExistsSync.mockReturnValue(true);
+    mockedWriteFileSync.mockImplementation(() => undefined);
 
     await generateSitemap();
 
-    const xmlContent = (fs.writeFileSync as any).mock.calls[0][1] as string;
+    const xmlContent = mockedWriteFileSync.mock.calls[0][1] as string;
     expect(xmlContent).toContain('&amp;');
     expect(xmlContent).toContain('&lt;');
     expect(xmlContent).toContain('&gt;');
@@ -171,10 +185,12 @@ describe('Sitemap Generator', () => {
 
   it('should handle empty route list gracefully', async () => {
     mockScanRoutes.mockResolvedValue([]);
+    mockedExistsSync.mockReturnValue(true);
+    mockedWriteFileSync.mockImplementation(() => undefined);
 
     await generateSitemap();
 
-    const xmlContent = (fs.writeFileSync as any).mock.calls[0][1] as string;
+    const xmlContent = mockedWriteFileSync.mock.calls[0][1] as string;
     expect(xmlContent).toContain('<urlset');
     expect(xmlContent).toContain('</urlset>');
 
@@ -184,7 +200,8 @@ describe('Sitemap Generator', () => {
   });
 
   it('should handle file system write errors', async () => {
-    (fs.writeFileSync as any).mockImplementation(() => {
+    mockedExistsSync.mockReturnValue(true);
+    mockedWriteFileSync.mockImplementation(() => {
       throw new Error('Write permission denied');
     });
 
@@ -201,6 +218,7 @@ describe('Sitemap Generator', () => {
       }
     ];
     mockScanRoutes.mockResolvedValue(invalidRoutes);
+    mockedExistsSync.mockReturnValue(true);
 
     await expect(generateSitemap()).rejects.toThrow(/Invalid priority/);
   });
