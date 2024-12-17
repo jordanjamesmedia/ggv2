@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import type { Stats, PathLike } from 'fs';
+import type { Stats } from 'fs';
 
 // Mock modules
 vi.mock('fs', () => {
@@ -77,7 +77,7 @@ describe('Route Scanner', () => {
     vi.resetAllMocks();
 
     // Mock file existence checks
-    mockedExistsSync.mockImplementation((filePath: PathLike) => {
+    mockedExistsSync.mockImplementation((filePath: string) => {
       const normalizedPath = filePath.toString().replace(/\\/g, '/');
       return Object.keys(mockFiles).some(mockPath => 
         normalizedPath.endsWith(mockPath) ||
@@ -91,7 +91,7 @@ describe('Route Scanner', () => {
     });
 
     // Mock directory reading
-    mockedReaddirSync.mockImplementation((dirPath: PathLike) => {
+    mockedReaddirSync.mockImplementation((dirPath: string) => {
       const normalizedPath = dirPath.toString().replace(/\\/g, '/');
       if (normalizedPath.endsWith('components')) {
         return ['Home', 'Services', 'About', 'Privacy'];
@@ -131,7 +131,7 @@ describe('Route Scanner', () => {
     });
 
     // Mock file stats
-    mockedStatSync.mockImplementation((filePath: PathLike) => ({
+    mockedStatSync.mockImplementation((filePath: string) => ({
       mtime: new Date(),
       isDirectory: () => {
         const normalizedPath = filePath.toString().replace(/\\/g, '/');
@@ -149,18 +149,6 @@ describe('Route Scanner', () => {
                normalizedPath.match(/post-\d+\.md$/);
       }
     } as Stats));
-
-    // Mock path resolution
-    (path.resolve as ReturnType<typeof vi.fn>).mockImplementation((...args: string[]) => args.join('/'));
-    (path.join as ReturnType<typeof vi.fn>).mockImplementation((...args: string[]) => args.join('/'));
-    (path.basename as ReturnType<typeof vi.fn>).mockImplementation((p: string) => p.split('/').pop());
-    (path.dirname as ReturnType<typeof vi.fn>).mockImplementation((p: string) => p.split('/').slice(0, -1).join('/'));
-    (path.relative as ReturnType<typeof vi.fn>).mockImplementation((from: string, to: string) => {
-      const fromParts = from.split('/');
-      const toParts = to.split('/');
-      const relativeParts = toParts.slice(fromParts.length);
-      return relativeParts.join('/');
-    });
   });
 
   afterEach(() => {
@@ -206,13 +194,13 @@ describe('Route Scanner', () => {
 
   it('should handle missing content directories gracefully', async () => {
     // Mock fs.existsSync to return false for content directories
-    mockedExistsSync.mockImplementation((filePath: PathLike) => {
+    mockedExistsSync.mockImplementation((filePath: string) => {
       const normalizedPath = filePath.toString().replace(/\\/g, '/');
       return normalizedPath.includes('components') && !normalizedPath.includes('content');
     });
 
     // Mock readdirSync to only return component files
-    mockedReaddirSync.mockImplementation((dirPath: PathLike) => {
+    mockedReaddirSync.mockImplementation((dirPath: string) => {
       const normalizedPath = dirPath.toString().replace(/\\/g, '/');
       if (normalizedPath.includes('components')) {
         return ['Home', 'Services', 'About', 'Privacy'];
@@ -232,7 +220,7 @@ describe('Route Scanner', () => {
   });
 
   it('should handle files with different extensions', async () => {
-    mockedReaddirSync.mockImplementation((dirPath: PathLike) => {
+    mockedReaddirSync.mockImplementation((dirPath: string) => {
       const normalizedPath = dirPath.toString().replace(/\\/g, '/');
       if (normalizedPath.includes('components')) {
         return ['Home', 'Services', 'About', 'Privacy'];
@@ -254,7 +242,7 @@ describe('Route Scanner', () => {
   });
 
   it('should handle nested content directories', async () => {
-    mockedReaddirSync.mockImplementation((dirPath: PathLike) => {
+    mockedReaddirSync.mockImplementation((dirPath: string) => {
       const normalizedPath = dirPath.toString().replace(/\\/g, '/');
       if (normalizedPath.includes('components')) {
         return ['Home', 'Services', 'About', 'Privacy'];
@@ -271,7 +259,7 @@ describe('Route Scanner', () => {
       return [];
     });
 
-    mockedStatSync.mockImplementation((filePath: PathLike) => ({
+    mockedStatSync.mockImplementation((filePath: string) => ({
       mtime: new Date(),
       isDirectory: () => {
         if (filePath.toString().endsWith('.md')) return false;
@@ -304,7 +292,7 @@ describe('Route Scanner', () => {
   });
 
   it('should normalize paths correctly', async () => {
-    mockedReaddirSync.mockImplementation((dirPath: PathLike) => {
+    mockedReaddirSync.mockImplementation((dirPath: string) => {
       const normalizedPath = dirPath.toString().replace(/\\/g, '/');
       if (normalizedPath.includes('components')) {
         return ['Home', 'Services', 'About', 'Privacy'];
@@ -334,7 +322,7 @@ describe('Route Scanner', () => {
   });
 
   it('should handle duplicate routes', async () => {
-    mockedReaddirSync.mockImplementation((dirPath: PathLike) => {
+    mockedReaddirSync.mockImplementation((dirPath: string) => {
       const normalizedPath = dirPath.toString().replace(/\\/g, '/');
       if (normalizedPath.includes('components')) {
         return ['Home', 'Services', 'About', 'Privacy'];
@@ -352,7 +340,7 @@ describe('Route Scanner', () => {
   });
 
   it('should handle non-ASCII characters in filenames', async () => {
-    mockedReaddirSync.mockImplementation((dirPath: PathLike) => {
+    mockedReaddirSync.mockImplementation((dirPath: string) => {
       const normalizedPath = dirPath.toString().replace(/\\/g, '/');
       if (normalizedPath.includes('components')) {
         return ['Home', 'Services', 'About', 'Privacy'];
@@ -371,7 +359,7 @@ describe('Route Scanner', () => {
   });
 
   it('should handle large numbers of routes', async () => {
-    mockedReaddirSync.mockImplementation((dirPath: PathLike) => {
+    mockedReaddirSync.mockImplementation((dirPath: string) => {
       const normalizedPath = dirPath.toString().replace(/\\/g, '/');
       if (normalizedPath.includes('components')) {
         return ['Home', 'Services', 'About', 'Privacy'];
@@ -388,7 +376,7 @@ describe('Route Scanner', () => {
   });
 
   it('should handle malformed file paths', async () => {
-    mockedReaddirSync.mockImplementation((dirPath: PathLike) => {
+    mockedReaddirSync.mockImplementation((dirPath: string) => {
       const normalizedPath = dirPath.toString().replace(/\\/g, '/');
       if (normalizedPath.includes('components')) {
         return ['Home', 'Services', 'About', 'Privacy'];
@@ -420,7 +408,7 @@ describe('Route Scanner', () => {
   });
 
   it('should handle special XML characters in paths', async () => {
-    mockedReaddirSync.mockImplementation((dirPath: PathLike) => {
+    mockedReaddirSync.mockImplementation((dirPath: string) => {
       const normalizedPath = dirPath.toString().replace(/\\/g, '/');
       if (normalizedPath.includes('components')) {
         return ['Home', 'Services', 'About', 'Privacy'];

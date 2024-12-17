@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import type { Stats, PathLike } from 'fs';
+import type { Stats } from 'fs';
 import { XMLParser } from 'fast-xml-parser';
 
 // Mock modules
@@ -97,14 +97,6 @@ describe('Sitemap Generator', () => {
       size: 1000,
       mtime: new Date()
     } as Stats);
-
-    // Mock path resolution
-    (path.resolve as ReturnType<typeof vi.fn>).mockImplementation((...args: string[]) => args.join('/'));
-    (path.join as ReturnType<typeof vi.fn>).mockImplementation((...args: string[]) => args.join('/'));
-    (path.basename as ReturnType<typeof vi.fn>).mockImplementation((p: string) => p.split('/').pop());
-    (path.dirname as ReturnType<typeof vi.fn>).mockImplementation((p: string) => p.split('/').slice(0, -1).join('/'));
-
-    // Mock zlib compression
     mockedGzipSync.mockImplementation((data: string | Buffer) => Buffer.from(data));
   });
 
@@ -113,9 +105,6 @@ describe('Sitemap Generator', () => {
   });
 
   it('should generate a valid sitemap XML file', async () => {
-    mockedExistsSync.mockReturnValue(true);
-    mockedWriteFileSync.mockImplementation(() => undefined);
-
     await generateSitemap();
 
     expect(mockedWriteFileSync).toHaveBeenCalledTimes(2); // Once for XML, once for gzip
