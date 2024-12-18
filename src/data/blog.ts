@@ -4,6 +4,9 @@ import gc8 from '../assets/images/gc8.jpg'
 import gc11 from '../assets/images/gc11.jpg'
 import gc13 from '../assets/images/gc13.jpg'
 import gc14 from '../assets/images/gc14.jpg'
+import gc15 from '../assets/images/gc15.jpg'
+import gc16 from '../assets/images/gc16.jpg'
+import gc17 from '../assets/images/gc17.png'
 
 export interface BlogPost {
   id: string;
@@ -14,236 +17,409 @@ export interface BlogPost {
   author: string;
   imageUrl: string;
   readTime: number;
+  categories: string[];
 }
 
 export const blogPosts: BlogPost[] = [
   {
-    id: 'why-regular-gutter-cleaning-is-essential',
-    title: 'Why Regular Gutter Cleaning is Essential for Your Home',
-    excerpt: 'Discover the importance of maintaining clean gutters and how it protects your home from water damage, foundation issues, and pest infestations.',
-    content: `
-      Regular gutter cleaning is one of the most important maintenance tasks for your home, yet it's often overlooked. Clean gutters are essential for protecting your home's foundation, preventing water damage, and maintaining your property's value.
+    id: 'gutter-maintenance-guide',
+    title: 'Complete Guide to Gutter Maintenance',
+    excerpt: 'Regular gutter maintenance is crucial for protecting your home from water damage. Here\'s everything you need to know about keeping your gutters in top condition.',
+    content: `Regular gutter maintenance is crucial for protecting your home from water damage. Here's everything you need to know about keeping your gutters in top condition.
 
-      When gutters become clogged with leaves, twigs, and debris, they can't effectively channel water away from your home. This can lead to several serious problems:
+## Why Gutter Maintenance Matters
 
-      1. Foundation Damage
-      When gutters overflow, water pools around your home's foundation. Over time, this can lead to cracks, settling, and expensive repairs.
+Your gutters play a vital role in protecting your home's foundation, walls, and landscaping from water damage. When properly maintained, they direct rainwater away from your home, preventing:
 
-      2. Roof Damage
-      Backed-up gutters can cause water to seep under your roofing materials, leading to rotted roof decking, damaged shingles, and interior water damage.
+- Foundation damage
+- Basement flooding
+- Soil erosion
+- Siding damage
+- Roof damage
 
-      3. Pest Infestations
-      Clogged gutters create the perfect environment for pests like mosquitoes, birds, and rodents to make their homes.
+## Maintenance Schedule
 
-      4. Ice Dams
-      In winter, clogged gutters can lead to ice dams, which can cause significant damage to your roof and gutters.
+For optimal performance, follow this maintenance schedule:
 
-      5. Landscape Erosion
-      Overflowing gutters can erode your landscaping and damage plants below.
+1. Clean gutters at least twice a year
+2. Inspect gutters after major storms
+3. Check for proper alignment and secure fasteners quarterly
+4. Test downspouts for proper drainage seasonally
 
-      To protect your home, we recommend cleaning your gutters at least twice a year - more frequently if you have many trees near your house. Professional gutter cleaning ensures thorough removal of debris and inspection of your gutter system for any potential issues.
-    `,
+## Professional vs. DIY Maintenance
+
+While some homeowners choose to maintain their gutters themselves, professional service offers several advantages:
+
+- Safety (no ladder accidents)
+- Thorough inspection
+- Professional equipment
+- Time savings
+- Warranty protection`,
     date: '2023-12-05',
     author: 'Mike Wilson',
     imageUrl: gc13,
-    readTime: 5
+    readTime: 5,
+    categories: ['Gutter Maintenance', 'DIY Guides', 'Home Improvement']
   },
   {
-    id: 'signs-you-need-gutter-cleaning',
-    title: '5 Warning Signs Your Gutters Need Cleaning',
-    excerpt: 'Learn to recognize the telltale signs that indicate your gutters need professional cleaning before serious damage occurs.',
-    content: `
-      Your gutters play a crucial role in protecting your home from water damage, but how do you know when they need cleaning? Here are five warning signs to watch for:
+    id: 'signs-of-gutter-damage',
+    title: 'Signs Your Gutters Need Professional Attention',
+    excerpt: 'Learn to recognize the warning signs that indicate your gutters need professional cleaning or repair before serious damage occurs.',
+    content: `Your gutters are essential for protecting your home from water damage, but how do you know when they need professional attention? Here are the key signs to watch for.
 
-      1. Overflowing During Rain
-      If you notice water cascading over the sides of your gutters during rainfall, this is a clear sign they're clogged. This overflow can damage your fascia boards and foundation.
+## Common Warning Signs
 
-      2. Sagging Gutters
-      When gutters become too heavy with debris and standing water, they begin to pull away from your house. This can lead to structural damage and eventual gutter system failure.
+1. Overflowing During Rain
+- Water cascading over the sides
+- Waterfalls forming at specific points
+- Uneven water distribution
 
-      3. Plant Growth
-      Seeds can sprout in the accumulated debris in your gutters. If you see plants growing, it's definitely time for a cleaning.
+2. Visible Physical Damage
+- Sagging or pulling away from the house
+- Cracks or splits in the gutters
+- Rust spots or holes
+- Loose or missing fasteners
 
-      4. Pest Activity
-      An increase in bird or pest activity around your gutters often indicates they're full of organic matter that's attracting wildlife.
+3. Water Damage Signs
+- Water marks under the gutters
+- Peeling paint or rotting wood
+- Basement flooding
+- Foundation cracks
+- Landscape erosion
 
-      5. Water Marks
-      Water marks or damage on your siding beneath the gutters is a sign that water is not being properly channeled away from your home.
+4. Pest Problems
+- Birds nesting in gutters
+- Mosquito breeding in standing water
+- Rodents using gutters as pathways
 
-      Don't wait until you see these signs to schedule a cleaning. Regular maintenance can prevent these issues and protect your home from costly water damage.
-    `,
+5. Plant Growth
+- Weeds growing in gutters
+- Moss or algae formation
+- Seeds sprouting from accumulated debris
+
+## When to Call a Professional
+
+Contact a professional gutter service when you notice:
+- Multiple warning signs
+- Safety concerns about DIY repairs
+- Recurring problems despite maintenance
+- Structural issues with mounting
+
+Early intervention can prevent costly repairs and protect your home's integrity.`,
     date: '2023-12-04',
     author: 'Sarah Johnson',
     imageUrl: gc11,
-    readTime: 4
+    readTime: 6,
+    categories: ['Gutter Maintenance', 'Professional Services', 'Home Improvement']
   },
   {
     id: 'gutter-guard-benefits',
     title: 'The Benefits of Installing Gutter Guards',
-    excerpt: 'Explore how gutter guards can reduce maintenance needs, protect your home, and provide long-term cost savings.',
-    content: `
-      Gutter guards are an investment in your home's protection and maintenance efficiency. These simple additions to your gutter system can provide numerous benefits:
+    excerpt: 'Discover how gutter guards can protect your home, reduce maintenance needs, and provide long-term cost savings for homeowners.',
+    content: `Gutter guards are an investment in your home's protection and maintenance efficiency. Let's explore their numerous benefits and why they might be right for your home.
 
-      Long-Term Cost Savings
-      While there's an initial investment, gutter guards can save you money over time by:
-      - Reducing the frequency of professional cleanings
-      - Preventing costly water damage repairs
-      - Extending the life of your gutter system
+## What Are Gutter Guards?
 
-      Reduced Maintenance
-      Gutter guards significantly reduce the amount of debris that enters your gutters, meaning:
-      - Less frequent cleaning required
-      - Reduced risk of clogs
-      - Easier maintenance when cleaning is needed
+Gutter guards are protective covers installed over your gutters to prevent debris from entering while allowing water to flow through. They come in various styles and materials, each with unique advantages.
 
-      Better Water Flow
-      Protected gutters function more effectively by:
-      - Maintaining consistent water flow
-      - Preventing overflow and water damage
-      - Reducing the risk of ice dams in winter
+## Key Benefits
 
-      Home Protection
-      Gutter guards help protect your home by:
-      - Preventing pest infestations
-      - Reducing fire risk from dry debris
-      - Protecting your foundation from water damage
+1. Reduced Maintenance
+- Less frequent cleaning required
+- Minimal debris accumulation
+- Lower risk of clogs
 
-      While gutter guards don't eliminate the need for maintenance entirely, they can significantly reduce it while providing better protection for your home.
-    `,
+2. Protection Benefits
+- Prevents rust and corrosion
+- Reduces pest infestations
+- Extends gutter lifespan
+- Fire protection in bushfire zones
+
+3. Cost Savings
+- Fewer professional cleanings
+- Prevents costly repairs
+- Protects foundation
+- Energy efficiency benefits
+
+## Types of Gutter Guards
+
+Choose from various options:
+- Mesh screens
+- Foam inserts
+- Brush guards
+- Surface-tension guards
+- Micro-mesh systems
+
+## Professional Installation
+
+While DIY installation is possible, professional installation ensures:
+- Proper fit and alignment
+- Warranty protection
+- Optimal performance
+- Expert material selection`,
     date: '2023-12-03',
-    author: 'Tom Anderson',
-    imageUrl: gc8,
-    readTime: 6
-  },
-  {
-    id: 'professional-vs-diy-gutter-cleaning',
-    title: 'Professional vs DIY Gutter Cleaning: What You Need to Know',
-    excerpt: 'Compare the pros and cons of professional gutter cleaning services versus doing it yourself, including safety considerations and cost analysis.',
-    content: `
-      When it comes to gutter cleaning, homeowners often debate between hiring professionals or tackling the job themselves. Here's a comprehensive comparison to help you make an informed decision:
-
-      Professional Gutter Cleaning
-      Advantages:
-      - Safety: Professionals have proper equipment and training
-      - Thoroughness: Complete cleaning and inspection of your gutter system
-      - Efficiency: Quick completion with professional tools
-      - Insurance: Protection against accidents or damage
-      - Expert Assessment: Identification of potential issues
-
-      Disadvantages:
-      - Cost: Higher upfront expense
-      - Scheduling: Need to coordinate with service provider
-
-      DIY Gutter Cleaning
-      Advantages:
-      - Cost Savings: Only equipment expenses
-      - Flexibility: Clean on your own schedule
-      - Immediate Action: Address issues as soon as you notice them
-
-      Disadvantages:
-      - Safety Risks: Working at height can be dangerous
-      - Time-Consuming: Longer completion time without professional tools
-      - Limited Expertise: May miss potential problems
-      - Equipment Needs: Must purchase or rent proper tools
-
-      For most homeowners, professional cleaning is the safer and more efficient choice, especially for multi-story homes or complex gutter systems.
-    `,
-    date: '2023-12-02',
-    author: 'Chris Martinez',
+    author: 'Mike Wilson',
     imageUrl: gc7,
-    readTime: 7
+    readTime: 7,
+    categories: ['Gutter Maintenance', 'Home Improvement', 'Professional Services']
   },
   {
-    id: 'seasonal-gutter-maintenance-guide',
-    title: 'Your Seasonal Gutter Maintenance Guide',
-    excerpt: 'A comprehensive guide to maintaining your gutters throughout the year, with specific tips for each season.',
-    content: `
-      Proper gutter maintenance varies with the seasons. Here's your guide to keeping your gutters in top condition year-round:
+    id: 'seasonal-gutter-care',
+    title: 'Seasonal Gutter Maintenance Tips',
+    excerpt: 'Learn how to properly maintain your gutters throughout the year with our comprehensive seasonal guide to gutter care and protection.',
+    content: `Different seasons bring different challenges for your gutter system. Here's how to keep them functioning optimally year-round.
 
-      Spring Maintenance
-      - Remove winter debris and check for winter damage
-      - Clear any remaining ice or snow
-      - Check for loose brackets or sagging
-      - Clean out accumulated seeds and pollen
-      
-      Summer Maintenance
-      - Remove debris from summer storms
-      - Check for bird nests and pest infestations
-      - Ensure downspouts are clear and directing water properly
-      - Look for signs of sun damage or warping
+## Spring Maintenance
 
-      Fall Maintenance
-      - Regular cleaning as leaves fall
-      - Install leaf guards if needed
-      - Check for proper drainage
-      - Ensure gutters are secure before winter
+1. Post-Winter Inspection
+- Check for winter damage
+- Clear winter debris
+- Test drainage flow
+- Inspect downspouts
 
-      Winter Maintenance
-      - Remove ice dams as they form
-      - Check for snow accumulation
-      - Monitor for icicles
-      - Look for signs of stress from ice and snow weight
+2. Spring Cleaning Tasks
+- Remove pollen and seeds
+- Check for bird nests
+- Clean splash blocks
+- Tighten fasteners
 
-      Year-Round Tips
-      - Inspect after major storms
-      - Monitor for signs of water damage
-      - Keep trees trimmed away from gutters
-      - Address repairs promptly
+## Summer Care
 
-      Following this seasonal guide helps prevent major issues and extends the life of your gutter system.
-    `,
+1. Storm Preparation
+- Clear any debris
+- Check for loose components
+- Ensure proper drainage
+- Trim overhanging branches
+
+2. Regular Monitoring
+- Watch for overflow during rain
+- Check for sagging
+- Monitor downspout function
+- Look for pest activity
+
+## Fall Preparation
+
+1. Leaf Management
+- Regular leaf removal
+- Install leaf guards
+- Clear roof valleys
+- Check downspout clearance
+
+2. Pre-Winter Checks
+- Final thorough cleaning
+- Secure loose components
+- Seal any leaks
+- Clear all drainage paths
+
+## Winter Protection
+
+1. Ice Dam Prevention
+- Check insulation
+- Monitor ice buildup
+- Clear snow safely
+- Maintain proper ventilation
+
+2. Emergency Care
+- Safe ice removal
+- Monitor for damage
+- Address leaks promptly
+- Professional help when needed`,
+    date: '2023-12-02',
+    author: 'Sarah Johnson',
+    imageUrl: gc8,
+    readTime: 8,
+    categories: ['Seasonal Tips', 'Gutter Maintenance', 'DIY Guides']
+  },
+  {
+    id: 'diy-gutter-cleaning',
+    title: 'DIY Gutter Cleaning Safety Guide',
+    excerpt: 'Essential safety tips and best practices for homeowners who want to clean their gutters themselves. Learn how to maintain your gutters safely.',
+    content: `If you're planning to clean your gutters yourself, safety should be your top priority. Follow these guidelines to ensure a safe and effective cleaning process.
+
+## Safety Equipment
+
+Essential gear includes:
+- Sturdy extension ladder
+- Non-slip shoes
+- Work gloves
+- Safety goggles
+- Dust mask
+- Bucket or tarp
+- Garden hose
+
+## Ladder Safety
+
+1. Proper Setup
+- Level ground placement
+- Secure footing
+- Correct angle (75 degrees)
+- Extended above roofline
+- Helper to spot you
+
+2. Safe Usage
+- Three points of contact
+- Don't overreach
+- Move ladder frequently
+- Avoid power lines
+- Check weight rating
+
+## Cleaning Process
+
+1. Preparation
+- Check weather forecast
+- Inform someone
+- Clear work area
+- Gather all tools
+- Plan your approach
+
+2. Safe Technique
+- Remove large debris first
+- Use scoop or trowel
+- Work away from downspouts
+- Flush with water
+- Check downspout flow
+
+## When to Call a Professional
+
+Consider professional help if:
+- Working at heights makes you uncomfortable
+- Your home is multi-story
+- You have physical limitations
+- Gutters are severely clogged
+- You spot damage needing repair`,
     date: '2023-12-01',
-    author: 'Emily Parker',
+    author: 'Mike Wilson',
     imageUrl: gc14,
-    readTime: 8
+    readTime: 6,
+    categories: ['DIY Guides', 'Gutter Maintenance', 'Home Improvement']
   },
   {
-    id: 'common-gutter-problems',
-    title: 'Common Gutter Problems and How to Fix Them',
-    excerpt: 'Learn about the most common gutter issues homeowners face and get expert advice on how to address them effectively.',
-    content: `
-      Understanding common gutter problems and their solutions can help you maintain your home's drainage system effectively. Here are the most frequent issues and how to address them:
+    id: 'gutter-installation-guide',
+    title: 'Professional Gutter Installation Guide',
+    excerpt: 'Understanding the process of professional gutter installation, from material selection to final inspection. Learn what to expect during installation.',
+    content: `Professional gutter installation is crucial for protecting your home from water damage. Here's what you need to know about the process and what to expect.
 
-      1. Clogged Gutters
-      Problem: Debris accumulation preventing proper water flow
-      Solution:
-      - Regular cleaning (at least twice yearly)
-      - Install gutter guards
-      - Trim overhanging branches
+## Pre-Installation Planning
 
-      2. Sagging Gutters
-      Problem: Gutters pulling away from the house
-      Solution:
-      - Replace damaged brackets
-      - Add additional support hangers
-      - Check for proper slope
+1. Site Assessment
+- Roof configuration
+- Drainage patterns
+- Local rainfall data
+- Property grading
+- Existing issues
 
-      3. Leaking Joints
-      Problem: Water leaking at seams and corners
-      Solution:
-      - Seal joints with gutter sealant
-      - Replace damaged sections
-      - Consider seamless gutters
+2. Material Selection
+- Aluminum
+- Copper
+- Steel
+- Vinyl
+- Zinc
 
-      4. Improper Slope
-      Problem: Water not flowing to downspouts
-      Solution:
-      - Adjust hangers to create proper slope
-      - Realign gutter sections
-      - Professional re-installation if needed
+## Installation Process
 
-      5. Damaged Downspouts
-      Problem: Crushed or disconnected downspouts
-      Solution:
-      - Replace damaged sections
-      - Add downspout supports
-      - Install splash blocks at base
+1. Preparation
+- Remove old gutters
+- Inspect fascia boards
+- Mark slope calculations
+- Position downspouts
+- Prepare materials
 
-      Regular inspection and maintenance can prevent most of these issues from becoming major problems.
-    `,
+2. Installation Steps
+- Hang brackets
+- Install end caps
+- Mount gutters
+- Add downspouts
+- Seal joints
+
+## Quality Checks
+
+Important inspections include:
+- Proper slope
+- Secure mounting
+- Sealed joints
+- Downspout alignment
+- Water flow test
+
+## Maintenance Tips
+
+After installation:
+- Regular cleaning
+- Annual inspections
+- Prompt repairs
+- Monitor performance
+- Document warranty`,
     date: '2023-11-30',
-    author: 'David Thompson',
-    imageUrl: gc2,
-    readTime: 6
+    author: 'Sarah Johnson',
+    imageUrl: gc15,
+    readTime: 7,
+    categories: ['Professional Services', 'Home Improvement', 'Gutter Maintenance']
+  },
+  {
+    id: 'eco-friendly-gutter-solutions',
+    title: 'Eco-Friendly Gutter Solutions for Sustainable Homes',
+    excerpt: 'Discover environmentally conscious gutter solutions that help protect both your home and the planet. Learn about sustainable materials and water conservation.',
+    content: `As homeowners become more environmentally conscious, the demand for sustainable gutter solutions continues to grow. Here's how you can make your gutter system more eco-friendly.
+
+## Sustainable Materials
+
+1. Recyclable Options
+- Aluminum gutters (100% recyclable)
+- Copper gutters (long-lasting)
+- Steel gutters (durable)
+- Recycled plastic components
+- Sustainable fasteners
+
+2. Environmental Benefits
+- Reduced carbon footprint
+- Less waste in landfills
+- Energy-efficient production
+- Local sourcing options
+- Biodegradable packaging
+
+## Water Conservation
+
+1. Rainwater Harvesting
+- Collection systems
+- Storage solutions
+- Filtration methods
+- Distribution options
+- Usage applications
+
+2. Garden Integration
+- Rain gardens
+- Permeable surfaces
+- Native plantings
+- Erosion control
+- Natural drainage
+
+## Maintenance Practices
+
+1. Eco-Friendly Cleaning
+- Natural cleaners
+- Biodegradable products
+- Water-saving methods
+- Safe disposal practices
+- Preventive care
+
+2. Sustainable Repairs
+- Recyclable materials
+- Local sourcing
+- Minimal waste
+- Energy efficiency
+- Long-term solutions
+
+## Future Trends
+
+Emerging technologies include:
+- Smart water management
+- Solar integration
+- Sustainable materials
+- Automated maintenance
+- Energy harvesting`,
+    date: '2023-11-29',
+    author: 'Mike Wilson',
+    imageUrl: gc17,
+    readTime: 8,
+    categories: ['Home Improvement', 'Professional Services', 'Seasonal Tips']
   }
 ]; 

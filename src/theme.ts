@@ -1,131 +1,104 @@
 import { createTheme } from '@mui/material/styles'
+import { cardThemeComponents, CARD_COLORS } from './styles/cardStyles'
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#4DD8E6',
-      dark: '#19b9cc',
-      light: '#74e2ee',
-      contrastText: '#ffffff',
+      main: '#1B4B5A',
+      light: '#4DD8E6',
+      dark: '#163F4C',
+      contrastText: '#FFFFFF'
     },
     secondary: {
-      main: '#2d3137',
-      dark: '#1a1c20',
-      light: '#565d69',
-      contrastText: '#ffffff',
+      main: '#4DD8E6',
+      light: '#7DE4ED',
+      dark: '#3CC7D5',
+      contrastText: '#FFFFFF'
     },
     background: {
-      default: '#f5f7f9',
-      paper: '#ffffff',
+      default: '#F8FAFC',
+      paper: CARD_COLORS.background
     },
     text: {
-      primary: '#1a1c20',
-      secondary: '#4a5568',
-    },
-    divider: 'rgba(0,0,0,0.08)',
+      primary: CARD_COLORS.text,
+      secondary: CARD_COLORS.mutedText
+    }
   },
   typography: {
-    fontFamily: 'Inter var, sans-serif',
+    fontFamily: '"Inter", "Helvetica", "Arial", sans-serif',
     h1: {
-      fontFamily: 'Playfair Display, serif',
+      fontSize: '3rem',
       fontWeight: 700,
-      fontSize: '3.75rem',
-      lineHeight: 1.2,
-      letterSpacing: '-0.02em',
+      lineHeight: 1.2
     },
     h2: {
-      fontFamily: 'Playfair Display, serif',
-      fontWeight: 700,
-      fontSize: '2.75rem',
-      lineHeight: 1.2,
-      letterSpacing: '-0.01em',
+      fontSize: '2.5rem',
+      fontWeight: 600,
+      lineHeight: 1.3
     },
     h3: {
-      fontFamily: 'Playfair Display, serif',
-      fontWeight: 600,
       fontSize: '2rem',
-      lineHeight: 1.3,
+      fontWeight: 600,
+      lineHeight: 1.4
+    },
+    h4: {
+      fontSize: '1.75rem',
+      fontWeight: 600,
+      lineHeight: 1.4
+    },
+    h5: {
+      fontSize: '1.5rem',
+      fontWeight: 600,
+      lineHeight: 1.4
+    },
+    h6: {
+      fontSize: '1.25rem',
+      fontWeight: 600,
+      lineHeight: 1.4
     },
     subtitle1: {
       fontSize: '1.125rem',
-      lineHeight: 1.6,
+      lineHeight: 1.6
+    },
+    subtitle2: {
+      fontSize: '0.875rem',
       fontWeight: 500,
+      lineHeight: 1.6
     },
     body1: {
       fontSize: '1rem',
-      lineHeight: 1.7,
-      color: '#4a5568',
+      lineHeight: 1.6
     },
-    button: {
-      textTransform: 'none',
-      fontWeight: 600,
-      fontSize: '1rem',
-      letterSpacing: '0.01em',
-    },
+    body2: {
+      fontSize: '0.875rem',
+      lineHeight: 1.6
+    }
   },
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: '0.75rem',
-          padding: '0.75rem 1.5rem',
-          boxShadow: '0 4px 14px rgba(0,0,0,0.1)',
-          transition: 'all 0.2s ease',
-          '&:hover': {
-            transform: 'translateY(-2px)',
-            boxShadow: '0 6px 20px rgba(0,0,0,0.15)',
-          },
+          borderRadius: 8,
+          textTransform: 'none',
+          fontWeight: 500,
+          padding: '8px 24px',
         },
         contained: {
+          boxShadow: 'none',
           '&:hover': {
-            transform: 'translateY(-2px)',
-          },
-        },
-        outlined: {
-          borderWidth: 2,
-          '&:hover': {
-            borderWidth: 2,
+            boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
           },
         },
       },
     },
-    MuiCard: {
+    ...cardThemeComponents,
+    MuiContainer: {
       styleOverrides: {
         root: {
-          borderRadius: '1rem',
-          border: '1px solid rgba(0,0,0,0.08)',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-          transition: 'all 0.3s ease',
-          '&:hover': {
-            transform: 'translateY(-4px)',
-            boxShadow: '0 12px 48px rgba(0,0,0,0.12)',
+          '@media (min-width:600px)': {
+            paddingLeft: 32,
+            paddingRight: 32,
           },
-        },
-      },
-    },
-    MuiTextField: {
-      styleOverrides: {
-        root: {
-          '& .MuiOutlinedInput-root': {
-            borderRadius: '0.75rem',
-            backgroundColor: '#ffffff',
-            '&:hover .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#4DD8E6',
-              borderWidth: 2,
-            },
-            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-              borderWidth: 2,
-            },
-          },
-        },
-      },
-    },
-    MuiPaper: {
-      styleOverrides: {
-        root: {
-          borderRadius: '1rem',
-          border: '1px solid rgba(0,0,0,0.08)',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
         },
       },
     },

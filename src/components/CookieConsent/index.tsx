@@ -42,17 +42,21 @@ export default function CookieConsent() {
         maxWidth: '600px',
         left: '50%',
         transform: 'translateX(-50%)',
-        bottom: { xs: 0, sm: '24px' },
-        '& .MuiPaper-root': {
+        bottom: { xs: '16px', sm: '24px' },
+        '& .MuiSnackbarContent-root': {
           width: '100%',
-          bgcolor: '#1B4B5A',
-          borderRadius: 2,
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
+          bgcolor: 'primary.dark',
+          backdropFilter: 'blur(8px)',
+          borderRadius: '16px',
+          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
+          mx: 2,
+          p: 0,
+          overflow: 'hidden'
         }
       }}
     >
-      <Box sx={{ p: 2 }}>
-        <Typography variant="body2" sx={{ color: 'white', mb: 1.5, fontSize: '0.875rem' }}>
+      <Box sx={{ p: 3, bgcolor: 'primary.dark', borderRadius: '16px' }}>
+        <Typography variant="body2" sx={{ color: 'white', mb: 2, fontSize: '0.9rem', lineHeight: 1.5 }}>
           We use cookies to enhance your experience. Read our{' '}
           <Link 
             component={RouterLink} 
@@ -67,7 +71,7 @@ export default function CookieConsent() {
         </Typography>
         <Box sx={{ 
           display: 'flex', 
-          gap: 1,
+          gap: 2,
           justifyContent: 'flex-end'
         }}>
           <Button
@@ -78,7 +82,9 @@ export default function CookieConsent() {
               color: 'white',
               borderColor: 'white',
               fontSize: '0.8125rem',
-              py: 0.5,
+              py: 0.75,
+              px: 2,
+              borderRadius: '8px',
               '&:hover': {
                 borderColor: 'white',
                 bgcolor: 'rgba(255, 255, 255, 0.1)'
@@ -95,7 +101,9 @@ export default function CookieConsent() {
               bgcolor: '#4DD8E6',
               color: 'white',
               fontSize: '0.8125rem',
-              py: 0.5,
+              py: 0.75,
+              px: 2,
+              borderRadius: '8px',
               '&:hover': {
                 bgcolor: '#3CC7D5'
               }

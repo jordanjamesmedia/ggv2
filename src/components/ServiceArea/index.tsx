@@ -1,17 +1,21 @@
-import { Container, Typography, Box, Grid, Paper } from '@mui/material'
+import React from 'react'
+import { Box, Container, Typography, Grid, Paper } from '@mui/material'
 import { Link } from 'react-router-dom'
-import serviceAreaMap from '../../assets/images/service-area-map.png'
-import areasBg from '../../assets/images/areasbg.png'
 import { locations } from '../../data/locations'
-import './ServiceArea.css'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
+import areasbg from '../../assets/images/areasbg.png'
+import serviceAreaMap from '../../assets/images/service-area-map.png'
 
 export default function ServiceArea() {
   const totalLocations = locations.length
-  const itemsPerColumn = Math.ceil(totalLocations / 3)
+  const itemsPerColumn = Math.ceil(totalLocations / 6)
   const columns = [
     locations.slice(0, itemsPerColumn),
     locations.slice(itemsPerColumn, itemsPerColumn * 2),
-    locations.slice(itemsPerColumn * 2)
+    locations.slice(itemsPerColumn * 2, itemsPerColumn * 3),
+    locations.slice(itemsPerColumn * 3, itemsPerColumn * 4),
+    locations.slice(itemsPerColumn * 4, itemsPerColumn * 5),
+    locations.slice(itemsPerColumn * 5)
   ]
 
   return (
@@ -27,7 +31,7 @@ export default function ServiceArea() {
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundImage: `url(${areasBg})`,
+          backgroundImage: `url(${areasbg})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           opacity: 0.1,
@@ -62,114 +66,111 @@ export default function ServiceArea() {
           </Typography>
         </Box>
 
-        <Grid container spacing={6} alignItems="center">
-          {/* Location Lists */}
-          <Grid item xs={12} md={6}>
-            <Box
-              sx={{
-                p: { xs: 2, sm: 4 },
-                borderRadius: 4,
-                bgcolor: 'rgba(255, 255, 255, 0.02)',
-                backdropFilter: 'blur(8px)',
-                border: '1px solid rgba(255, 255, 255, 0.05)'
-              }}
-            >
-              <Grid container spacing={{ xs: 1, sm: 3 }}>
-                {columns.map((column, colIndex) => (
-                  <Grid item xs={4} key={colIndex}>
-                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 0.5, sm: 1 } }}>
-                      {column.map((location) => (
-                        <Link 
-                          to={`/locations/${location.id}`} 
-                          key={location.id} 
-                          style={{ textDecoration: 'none' }}
+        {/* Location Lists */}
+        <Box
+          sx={{
+            p: { xs: 2, sm: 4 },
+            borderRadius: 4,
+            bgcolor: 'rgba(255, 255, 255, 0.02)',
+            backdropFilter: 'blur(8px)',
+            border: '1px solid rgba(255, 255, 255, 0.05)',
+            mb: 6
+          }}
+        >
+          <Grid container spacing={{ xs: 1, sm: 3 }}>
+            {columns.map((column, colIndex) => (
+              <Grid item xs={4} sm={4} md={2} key={colIndex}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 0.5, sm: 1 } }}>
+                  {column.map((location) => (
+                    <Link 
+                      to={`/locations/${location.id}`}
+                      key={location.id} 
+                      style={{ textDecoration: 'none' }}
+                    >
+                      <Box
+                        sx={{
+                          py: { xs: 0.5, sm: 1 },
+                          px: { xs: 0.5, sm: 2 },
+                          borderRadius: 2,
+                          transition: 'all 0.2s ease',
+                          textAlign: 'center',
+                          '&:hover': {
+                            bgcolor: 'rgba(255, 255, 255, 0.05)',
+                            transform: 'translateX(4px)'
+                          }
+                        }}
+                      >
+                        <Typography 
+                          sx={{ 
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            color: 'white',
+                            fontWeight: 500,
+                            fontSize: { xs: '0.75rem', sm: '0.95rem' },
+                            lineHeight: 1.2,
+                            gap: { xs: 0.25, sm: 0.5 }
+                          }}
                         >
-                          <Box
-                            sx={{
-                              py: { xs: 0.5, sm: 1 },
-                              px: { xs: 0.5, sm: 2 },
-                              borderRadius: 2,
-                              transition: 'all 0.2s ease',
-                              textAlign: 'center',
-                              '&:hover': {
-                                bgcolor: 'rgba(255, 255, 255, 0.05)',
-                                transform: 'translateX(4px)'
-                              }
-                            }}
-                          >
-                            <Typography 
-                              sx={{ 
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                color: 'white',
-                                fontWeight: 500,
-                                fontSize: { xs: '0.75rem', sm: '0.95rem' },
-                                lineHeight: 1.2,
-                                gap: { xs: 0.25, sm: 0.5 }
-                              }}
-                            >
-                              <span style={{
-                                display: 'block',
-                                width: '100%',
-                                textAlign: 'center',
-                                overflow: 'hidden',
-                                textOverflow: 'ellipsis',
-                                whiteSpace: 'nowrap'
-                              }}>
-                                {location.name}
-                              </span>
-                              <span style={{ 
-                                color: 'rgba(255,255,255,0.6)',
-                                fontSize: '0.7em',
-                                display: 'block'
-                              }}>
-                                {location.postcode}
-                              </span>
-                            </Typography>
-                          </Box>
-                        </Link>
-                      ))}
-                    </Box>
-                  </Grid>
-                ))}
+                          <span style={{
+                            display: 'block',
+                            width: '100%',
+                            textAlign: 'center',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap'
+                          }}>
+                            {location.name}
+                          </span>
+                          <span style={{ 
+                            color: 'rgba(255,255,255,0.6)',
+                            fontSize: '0.7em',
+                            display: 'block'
+                          }}>
+                            {location.postcode}
+                          </span>
+                        </Typography>
+                      </Box>
+                    </Link>
+                  ))}
+                </Box>
               </Grid>
-            </Box>
+            ))}
           </Grid>
+        </Box>
 
-          {/* Map */}
-          <Grid item xs={12} md={6}>
-            <Paper
-              elevation={0}
-              sx={{
-                p: 2,
-                borderRadius: 4,
-                overflow: 'hidden',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                bgcolor: 'rgba(255, 255, 255, 0.05)',
-                backdropFilter: 'blur(12px)',
-                transform: 'perspective(1000px) rotateY(-5deg)',
-                transition: 'all 0.3s ease',
-                '&:hover': {
-                  transform: 'perspective(1000px) rotateY(0deg)',
-                  boxShadow: '0 20px 60px rgba(0, 0, 0, 0.2)'
-                }
+        {/* Map Image */}
+        <Box sx={{ maxWidth: '400px', mx: 'auto' }}>
+          <Paper
+            elevation={0}
+            sx={{
+              p: 2,
+              borderRadius: 4,
+              overflow: 'hidden',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              bgcolor: 'rgba(255, 255, 255, 0.05)',
+              backdropFilter: 'blur(12px)',
+              transform: 'perspective(1000px) rotateY(-5deg)',
+              transition: 'all 0.3s ease',
+              '&:hover': {
+                transform: 'perspective(1000px) rotateY(0deg)',
+                boxShadow: '0 20px 60px rgba(0, 0, 0, 0.2)'
+              }
+            }}
+          >
+            <img 
+              src={serviceAreaMap} 
+              alt="Service Area Map - Wollongong and Illawarra Region" 
+              style={{
+                width: '100%',
+                height: 'auto',
+                display: 'block',
+                borderRadius: '12px'
               }}
-            >
-              <img 
-                src={serviceAreaMap} 
-                alt="Service Area Map - Wollongong and Illawarra Region" 
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                  display: 'block',
-                  borderRadius: '12px'
-                }}
-              />
-            </Paper>
-          </Grid>
-        </Grid>
+            />
+          </Paper>
+        </Box>
       </Container>
     </Box>
   )

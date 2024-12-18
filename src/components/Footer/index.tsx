@@ -1,6 +1,7 @@
 import React from 'react'
-import { Box, Container, Grid, Typography, Link } from '@mui/material'
+import { Box, Container, Grid, Typography, Link, Stack } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
+import logoSquare from '../../assets/images/logo-square.png'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -9,7 +10,7 @@ export default function Footer() {
     <Box 
       component="footer" 
       sx={{ 
-        bgcolor: 'secondary.main',
+        bgcolor: 'primary.dark',
         color: 'white',
         pt: 8,
         pb: 4,
@@ -21,15 +22,19 @@ export default function Footer() {
           {/* Company Info */}
           <Grid item xs={12} md={4}>
             <Box sx={{ mb: 4 }}>
-              <img 
-                src="/src/assets/images/logo-square.png" 
-                alt="Gutter Goat Logo" 
-                style={{ 
-                  height: '60px',
-                  width: 'auto',
-                  marginBottom: '1rem'
-                }}
-              />
+              <Stack direction="row" spacing={2} alignItems="center" sx={{ mb: 3 }}>
+                <img 
+                  src={logoSquare}
+                  alt="Gutter Goat Logo" 
+                  style={{ 
+                    height: '50px',
+                    width: 'auto'
+                  }}
+                />
+                <Typography variant="h6" sx={{ fontWeight: 600, color: 'white' }}>
+                  Gutter Goat
+                </Typography>
+              </Stack>
               <Typography variant="body2" sx={{ mb: 2, color: 'rgba(255, 255, 255, 0.8)' }}>
                 Professional gutter cleaning services in Wollongong and the Illawarra region. 
                 Reliable, efficient, and fully insured.

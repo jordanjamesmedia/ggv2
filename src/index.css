@@ -4,15 +4,11 @@
 
 @layer base {
   body {
-    @apply bg-white text-gray-900 antialiased;
+    @apply bg-white text-gray-900 antialiased min-h-screen;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif text-center;
-  }
-
-  p {
-    @apply text-center;
+    @apply font-serif;
   }
 }
 
@@ -22,15 +18,15 @@
   }
 
   .section-alt {
-    @apply bg-white;
+    @apply bg-gray-50;
   }
 
   .section-header {
-    @apply mb-12 md:mb-16 animate-fade-in text-center max-w-3xl mx-auto;
+    @apply mb-12 md:mb-16 animate-fade-in;
   }
 
   .section-subtitle {
-    @apply text-lg md:text-xl text-gray-600 mt-4 max-w-2xl mx-auto text-center;
+    @apply text-lg md:text-xl text-gray-600 mt-4 max-w-2xl mx-auto;
   }
 
   .section-cta {
@@ -97,7 +93,7 @@
   }
 
   .card-title {
-    @apply mb-4 font-semibold text-gray-900 text-xl text-center;
+    @apply mb-4 font-semibold text-gray-900 text-xl;
   }
 
   .card-description {

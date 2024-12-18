@@ -1,9 +1,11 @@
+import React from 'react'
 import { Container, Typography, Box, Grid, List, ListItem, ListItemIcon, ListItemText, Button, Paper } from '@mui/material'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import { locations } from '../../data/locations'
 import LeadForm from '../LeadForm'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
+import { useEffect } from 'react'
 
 // Import background images
 import gc2 from '../../assets/images/gc2.jpg'
@@ -54,19 +56,47 @@ const backgroundImages = {
   'kiama-downs': gc14
 }
 
-const getNearbyLocations = (currentLocation: typeof locations[0], count: number = 3) => {
-  return locations
-    .filter(loc => loc.id !== currentLocation.id)
-    .sort(() => Math.random() - 0.5)
-    .slice(0, count)
-}
-
 export default function LocationPage() {
   const { id } = useParams()
+  const navigate = useNavigate()
   const location = locations.find(loc => loc.id === id)
 
+  useEffect(() => {
+    if (!location) {
+      navigate('/locations')
+    }
+  }, [location, navigate])
+
   if (!location) {
-    return <div>Location not found</div>
+    return (
+      <Box sx={{ 
+        minHeight: '60vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        gap: 2,
+        mt: '74px'
+      }}>
+        <Typography variant="h4" sx={{ color: '#2C3E50' }}>
+          Location Not Found
+        </Typography>
+        <Button
+          component={Link}
+          to="/locations"
+          variant="contained"
+          sx={{
+            bgcolor: '#4DD8E6',
+            color: 'white',
+            '&:hover': {
+              bgcolor: '#3CC7D5'
+            }
+          }}
+        >
+          View All Locations
+        </Button>
+      </Box>
+    )
   }
 
   const nearbyLocations = locations
@@ -76,7 +106,7 @@ export default function LocationPage() {
   const backgroundImage = backgroundImages[location.id as keyof typeof backgroundImages] || gc2
 
   return (
-    <Box sx={{ mt: 0 }}>
+    <Box sx={{ mt: '74px' }}>
       {/* Hero Section */}
       <Box 
         sx={{
@@ -334,6 +364,8 @@ export default function LocationPage() {
                     Contact us today for a free, no-obligation quote.
                   </Typography>
                   <Button
+                    component={Link}
+                    to="/quote"
                     variant="contained"
                     fullWidth
                     sx={{

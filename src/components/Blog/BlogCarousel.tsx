@@ -1,11 +1,11 @@
+import React, { useState } from 'react'
 import { Box, Container, Typography, Card, CardContent, CardMedia, CardActionArea, IconButton, useTheme, useMediaQuery } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { blogPosts, BlogPost } from '../../data/blog'
+import { blogPosts } from '../../data/blog'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import PersonIcon from '@mui/icons-material/Person'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
-import { useState } from 'react'
 
 interface BlogCarouselProps {
   title?: string;
@@ -13,16 +13,15 @@ interface BlogCarouselProps {
   maxPosts?: number;
 }
 
-export default function BlogCarousel({ title = "Latest Articles", excludePostId, maxPosts = 3 }: BlogCarouselProps) {
+export default function BlogCarousel({ title = "Latest Articles", excludePostId, maxPosts = 6 }: BlogCarouselProps) {
   const [startIndex, setStartIndex] = useState(0)
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
   
   const filteredPosts = blogPosts
     .filter(post => !excludePostId || post.id !== excludePostId)
-    .slice(0, maxPosts)
 
-  const visiblePosts = isMobile ? filteredPosts : filteredPosts.slice(startIndex, startIndex + 3)
+  const visiblePosts = isMobile ? filteredPosts.slice(0, 1) : filteredPosts.slice(startIndex, startIndex + 3)
   const canScrollLeft = !isMobile && startIndex > 0
   const canScrollRight = !isMobile && startIndex + 3 < filteredPosts.length
 

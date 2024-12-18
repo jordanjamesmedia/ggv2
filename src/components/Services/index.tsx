@@ -1,175 +1,163 @@
 import React from 'react'
-import { Box, Container, Typography, Grid, Card, CardContent, CardMedia, Divider } from '@mui/material'
-import { SERVICES } from '../../data/services'
-import WaterDamageIcon from '@mui/icons-material/WaterDamage'
-import PestControlIcon from '@mui/icons-material/PestControl'
-import FoundationIcon from '@mui/icons-material/Foundation'
+import { Box, Container, Typography, Grid, Paper, Button } from '@mui/material'
+import CleaningServicesIcon from '@mui/icons-material/CleaningServices'
+import BuildIcon from '@mui/icons-material/Build'
+import SecurityIcon from '@mui/icons-material/Security'
+import { Link } from 'react-router-dom'
+import PageHeader from '../shared/PageHeader'
 
-const benefits = [
+const services = [
   {
-    icon: <WaterDamageIcon sx={{ fontSize: 40, color: '#4DD8E6' }} />,
-    title: 'Prevent Water Damage',
-    description: "Protect your home from foundation damage, basement flooding, and interior wall damage caused by overflowing gutters."
+    icon: <CleaningServicesIcon sx={{ fontSize: '2rem', color: '#4DD8E6' }} />,
+    title: 'Gutter Cleaning',
+    description: 'Complete removal of leaves, debris, and buildup from your gutters and downspouts.',
+    features: [
+      'Thorough cleaning of gutters and downspouts',
+      'Debris removal and disposal',
+      'Downspout flushing',
+      'Gutter functionality check'
+    ],
+    image: '/images/services/gutter-cleaning.jpg'
   },
   {
-    icon: <PestControlIcon sx={{ fontSize: 40, color: '#4DD8E6' }} />,
-    title: 'Eliminate Pest Havens',
-    description: "Stop mosquitoes, birds, and rodents from making their homes in debris-filled gutters."
+    icon: <BuildIcon sx={{ fontSize: '2rem', color: '#4DD8E6' }} />,
+    title: 'Gutter Maintenance',
+    description: 'Regular inspection and maintenance to keep your gutters functioning properly.',
+    features: [
+      'Regular inspections',
+      'Preventive cleaning',
+      'Flow testing',
+      'Performance optimization'
+    ],
+    image: '/images/services/gutter-maintenance.jpg'
   },
   {
-    icon: <FoundationIcon sx={{ fontSize: 40, color: '#4DD8E6' }} />,
-    title: 'Maintain Structural Health',
-    description: "Prevent mold growth, wood rot, and structural damage that can compromise your home's integrity."
+    icon: <SecurityIcon sx={{ fontSize: '2rem', color: '#4DD8E6' }} />,
+    title: 'Gutter Guard Installation',
+    description: 'Premium gutter guard installation to prevent debris buildup and reduce maintenance needs.',
+    features: [
+      'High-quality guard installation',
+      'Debris prevention system',
+      'Reduced maintenance needs',
+      'Extended gutter life'
+    ],
+    image: '/images/services/gutter-guard.jpg'
   }
 ]
 
-export default function Services() {
+const Services: React.FC = () => {
   return (
-    <Box sx={{ py: 8, bgcolor: '#f8fafc' }}>
-      <Container maxWidth="lg">
-        <Box sx={{ textAlign: 'center', mb: 6 }}>
-          <Typography 
-            variant="h2" 
-            sx={{ 
-              fontSize: { xs: '2rem', md: '2.5rem' },
-              fontWeight: 700,
-              color: '#2C3E50',
-              mb: 2
-            }}
-          >
-            Our Services
-          </Typography>
-          <Typography 
-            sx={{ 
-              fontSize: '1.1rem',
-              color: '#5D6D7E',
-              maxWidth: 800,
-              mx: 'auto'
-            }}
-          >
-            Professional gutter cleaning and protection services to maintain your home's gutter system and prevent water damage
-          </Typography>
-        </Box>
+    <Box>
+      <PageHeader
+        title="Our Services"
+        subtitle="Professional gutter cleaning and maintenance services to protect your home"
+        variant="services"
+      />
 
-        <Grid container spacing={4} sx={{ mb: 8 }}>
-          {SERVICES.map((service) => (
-            <Grid item xs={12} md={4} key={service.id}>
-              <Card 
-                sx={{ 
+      <Container maxWidth="lg" sx={{ py: { xs: 6, md: 8 } }}>
+        <Grid container spacing={4}>
+          {services.map((service, index) => (
+            <Grid item xs={12} md={4} key={index}>
+              <Paper
+                elevation={0}
+                sx={{
                   height: '100%',
                   display: 'flex',
                   flexDirection: 'column',
-                  borderRadius: 4,
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                  transition: 'transform 0.3s ease',
-                  '&:hover': {
-                    transform: 'translateY(-8px)'
-                  }
+                  borderRadius: 2,
+                  overflow: 'hidden',
+                  bgcolor: '#1B4B5A',
+                  color: 'white'
                 }}
               >
-                <CardMedia
-                  component="img"
-                  height="250"
-                  image={service.image}
-                  alt={service.title}
-                  sx={{ objectFit: 'cover' }}
-                />
-                <CardContent sx={{ flexGrow: 1, p: 4 }}>
-                  <Typography 
-                    gutterBottom 
-                    variant="h5" 
-                    sx={{ 
-                      fontSize: '1.5rem',
-                      fontWeight: 600,
-                      color: '#2C3E50',
-                      mb: 2
-                    }}
-                  >
-                    {service.title}
-                  </Typography>
-                  <Typography 
-                    sx={{ 
-                      color: '#5D6D7E',
-                      lineHeight: 1.6
-                    }}
-                  >
+                <Box
+                  sx={{
+                    position: 'relative',
+                    height: 200,
+                    backgroundImage: `url(${service.image})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    '&::before': {
+                      content: '""',
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      background: 'rgba(27, 75, 90, 0.7)'
+                    }
+                  }}
+                >
+                  <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 1 }}>
+                    {service.icon}
+                    <Typography variant="h5" sx={{ fontWeight: 600 }}>
+                      {service.title}
+                    </Typography>
+                  </Box>
+                </Box>
+
+                <Box sx={{ p: 3, flexGrow: 1 }}>
+                  <Typography sx={{ mb: 3, color: 'rgba(255, 255, 255, 0.9)' }}>
                     {service.description}
                   </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-
-        <Divider sx={{ my: 8 }} />
-
-        <Box sx={{ textAlign: 'center', mb: 6 }}>
-          <Typography 
-            variant="h2" 
-            sx={{ 
-              fontSize: { xs: '2rem', md: '2.5rem' },
-              fontWeight: 700,
-              color: '#2C3E50',
-              mb: 2
-            }}
-          >
-            Why Regular Maintenance Matters
-          </Typography>
-          <Typography 
-            sx={{ 
-              fontSize: '1.1rem',
-              color: '#5D6D7E',
-              maxWidth: 800,
-              mx: 'auto',
-              mb: 6
-            }}
-          >
-            Protect your investment and prevent costly repairs with professional gutter maintenance
-          </Typography>
-        </Box>
-
-        <Grid container spacing={4}>
-          {benefits.map((benefit, index) => (
-            <Grid item xs={12} md={4} key={index}>
-              <Card 
-                sx={{ 
-                  height: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  borderRadius: 4,
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                  p: 4
-                }}
-              >
-                <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
-                  {benefit.icon}
+                  
+                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+                    {service.features.map((feature, idx) => (
+                      <Box
+                        key={idx}
+                        sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 1,
+                          color: 'rgba(255, 255, 255, 0.9)',
+                          '&::before': {
+                            content: '""',
+                            width: 6,
+                            height: 6,
+                            borderRadius: '50%',
+                            bgcolor: '#4DD8E6',
+                            flexShrink: 0
+                          }
+                        }}
+                      >
+                        <Typography sx={{ fontSize: '0.9rem' }}>
+                          {feature}
+                        </Typography>
+                      </Box>
+                    ))}
+                  </Box>
                 </Box>
-                <Typography 
-                  variant="h5" 
-                  sx={{ 
-                    fontSize: '1.5rem',
-                    fontWeight: 600,
-                    color: '#2C3E50',
-                    mb: 2,
-                    textAlign: 'center'
-                  }}
-                >
-                  {benefit.title}
-                </Typography>
-                <Typography 
-                  sx={{ 
-                    color: '#5D6D7E',
-                    textAlign: 'center',
-                    lineHeight: 1.6
-                  }}
-                >
-                  {benefit.description}
-                </Typography>
-              </Card>
+
+                <Box sx={{ p: 3, pt: 0 }}>
+                  <Button
+                    component={Link}
+                    to="/quote"
+                    variant="contained"
+                    fullWidth
+                    sx={{
+                      bgcolor: '#4DD8E6',
+                      color: '#1B4B5A',
+                      py: 1.5,
+                      textTransform: 'none',
+                      fontWeight: 600,
+                      '&:hover': {
+                        bgcolor: '#3CC7D5'
+                      }
+                    }}
+                  >
+                    Get a Quote
+                  </Button>
+                </Box>
+              </Paper>
             </Grid>
           ))}
         </Grid>
       </Container>
     </Box>
   )
-} 
+}
+
+export default Services 

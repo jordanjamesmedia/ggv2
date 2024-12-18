@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, TextField, Button, MenuItem } from '@mui/material'
-import { Formik, Form, FormikHelpers } from 'formik'
+import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { useNavigate } from 'react-router-dom'
 import { SERVICE_OPTIONS, ServiceOption } from '../../data/services'
@@ -9,6 +9,7 @@ const validationSchema = Yup.object({
   name: Yup.string().required('Name is required'),
   email: Yup.string().email('Invalid email address').required('Email is required'),
   phone: Yup.string().required('Phone number is required'),
+  address: Yup.string().required('Address is required'),
   service: Yup.string(),
   message: Yup.string()
 })
@@ -17,6 +18,7 @@ interface FormValues {
   name: string;
   email: string;
   phone: string;
+  address: string;
   service: ServiceOption | '';
   message: string;
 }
@@ -24,30 +26,46 @@ interface FormValues {
 export default function LeadForm() {
   const navigate = useNavigate()
 
-  const handleSubmit = async (values: FormValues, { setSubmitting }: FormikHelpers<FormValues>) => {
+  const handleSubmit = async (values: FormValues, { setSubmitting }: any) => {
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
         body: JSON.stringify({
           access_key: '454855a9-c239-4927-ad3f-f626087fc12a',
           subject: `New Quote Request - ${values.service || 'General Inquiry'}`,
           from_name: 'Gutter Goat Website',
-          ...values
+          botcheck: '',
+          name: values.name,
+          email: values.email,
+          phone: values.phone,
+          address: values.address,
+          service: values.service,
+          message: values.message || 'No additional message provided.'
         })
       })
 
       const data = await response.json()
 
       if (data.success) {
+        // Track conversion if Google Analytics is available
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+          (window as any).gtag('event', 'form_submission', {
+            'event_category': 'Lead',
+            'event_label': values.service || 'General Inquiry'
+          });
+        }
         navigate('/thanks')
       } else {
-        console.error('Form submission failed')
+        console.error('Form submission failed:', data)
+        alert('Form submission failed. Please try again or contact us directly.')
       }
     } catch (error) {
       console.error('Form submission error:', error)
+      alert('An error occurred. Please try again or contact us directly at info@guttergoat.com.au')
     } finally {
       setSubmitting(false)
     }
@@ -59,6 +77,7 @@ export default function LeadForm() {
         name: '',
         email: '',
         phone: '',
+        address: '',
         message: '',
         service: ''
       }}
@@ -67,7 +86,7 @@ export default function LeadForm() {
     >
       {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
         <Box 
-          component="form" 
+          component={Form} 
           onSubmit={handleSubmit}
           sx={{ 
             display: 'flex',
@@ -135,6 +154,31 @@ export default function LeadForm() {
             onBlur={handleBlur}
             error={touched.phone && Boolean(errors.phone)}
             helperText={touched.phone && errors.phone}
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                '&:hover fieldset': {
+                  borderColor: '#4DD8E6',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: '#4DD8E6',
+                },
+              },
+              '& .MuiInputLabel-root.Mui-focused': {
+                color: '#4DD8E6',
+              }
+            }}
+          />
+
+          <TextField
+            fullWidth
+            id="address"
+            name="address"
+            label="Address"
+            value={values.address}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.address && Boolean(errors.address)}
+            helperText={touched.address && errors.address}
             sx={{
               '& .MuiOutlinedInput-root': {
                 '&:hover fieldset': {
@@ -224,10 +268,41 @@ export default function LeadForm() {
               fontSize: '1.1rem',
               '&:hover': {
                 bgcolor: '#3CC7D5'
+              },
+              '&.Mui-disabled': {
+                bgcolor: '#4DD8E6',
+                opacity: 0.7,
+                color: 'white'
               }
             }}
           >
-            Get Your Free Quote
+            {isSubmitting ? (
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Box
+                  component="span"
+                  sx={{
+                    width: 16,
+                    height: 16,
+                    border: '2px solid',
+                    borderColor: 'currentcolor',
+                    borderRightColor: 'transparent',
+                    borderRadius: '50%',
+                    animation: 'spin 1s linear infinite',
+                    '@keyframes spin': {
+                      '0%': {
+                        transform: 'rotate(0deg)',
+                      },
+                      '100%': {
+                        transform: 'rotate(360deg)',
+                      },
+                    },
+                  }}
+                />
+                Submitting...
+              </Box>
+            ) : (
+              'Get Your Free Quote'
+            )}
           </Button>
         </Box>
       )}
