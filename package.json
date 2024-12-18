@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "rm -rf dist",
     "build": "tsc && vite build",
     "postbuild": "npm run generate-sitemap && npm run optimize-images",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
@@ -33,6 +34,7 @@
     "yup": "^1.5.0"
   },
   "devDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.6.1",
     "@tsconfig/vite-react": "^2.0.1",
     "@types/node": "^20.17.10",
     "@types/react": "^18.2.37",
