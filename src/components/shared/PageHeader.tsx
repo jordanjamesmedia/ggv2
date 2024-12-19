@@ -2,7 +2,8 @@ import React from 'react';
 import { Box, Container, Typography } from '@mui/material';
 import gc2 from '../../assets/images/gc2.jpg';
 import gc8 from '../../assets/images/gc8.jpg';
-import gc14 from '../../assets/images/gc14.jpg';
+import gc11 from '../../assets/images/gc11.jpg';
+import gc13 from '../../assets/images/gc13.jpg';
 
 type PageHeaderProps = {
   title: string;
@@ -11,9 +12,9 @@ type PageHeaderProps = {
 };
 
 const backgroundImages = {
-  about: gc2,
+  about: gc13,
   blog: gc8,
-  services: gc2
+  services: gc11
 };
 
 export default function PageHeader({ title, subtitle, variant }: PageHeaderProps) {

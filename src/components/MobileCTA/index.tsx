@@ -14,7 +14,7 @@ export default function MobileCTA() {
     const handleScroll = () => {
       const scrollPosition = window.scrollY
       const windowHeight = window.innerHeight
-      const showThreshold = windowHeight * 0.3 // Show after 30% of viewport height
+      const showThreshold = windowHeight * 0.2 // Show after 20% of viewport height
       
       // Determine scroll direction
       setIsScrollingUp(scrollPosition < lastScrollY)
@@ -37,7 +37,7 @@ export default function MobileCTA() {
         bottom: 0,
         left: 0,
         right: 0,
-        bgcolor: CARD_COLORS.background,
+        bgcolor: 'rgba(27, 75, 90, 0.95)',
         backdropFilter: 'blur(8px)',
         boxShadow: '0 -4px 32px rgba(0,0,0,0.15)',
         p: 2,
@@ -45,19 +45,8 @@ export default function MobileCTA() {
         gap: 2,
         zIndex: 1000,
         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-        transform: showButtons && isScrollingUp ? 'translateY(0)' : 'translateY(100%)',
-        opacity: showButtons && isScrollingUp ? 1 : 0,
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: 'linear-gradient(to top, rgba(27, 75, 90, 0.95), rgba(27, 75, 90, 0.85))',
-          backdropFilter: 'blur(8px)',
-          zIndex: -1
-        }
+        transform: showButtons ? 'translateY(0)' : 'translateY(100%)',
+        opacity: showButtons ? 1 : 0
       }}
     >
       <Button
@@ -68,8 +57,8 @@ export default function MobileCTA() {
         fullWidth
         sx={{
           py: 1.5,
-          borderColor: CARD_COLORS.accent,
-          color: CARD_COLORS.accent,
+          borderColor: '#4DD8E6',
+          color: '#4DD8E6',
           transition: 'all 0.2s ease',
           '&:hover': {
             borderColor: '#3CC7D5',
@@ -88,7 +77,7 @@ export default function MobileCTA() {
         fullWidth
         sx={{
           py: 1.5,
-          bgcolor: CARD_COLORS.accent,
+          bgcolor: '#4DD8E6',
           transition: 'all 0.2s ease',
           '&:hover': {
             bgcolor: '#3CC7D5',

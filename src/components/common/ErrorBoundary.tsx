@@ -8,6 +8,7 @@ interface Props {
 interface State {
   hasError: boolean;
   error?: Error;
+  errorInfo?: ErrorInfo;
 }
 
 class ErrorBoundary extends Component<Props, State> {
@@ -16,11 +17,14 @@ class ErrorBoundary extends Component<Props, State> {
   };
 
   public static getDerivedStateFromError(error: Error): State {
+    console.error('Error caught by ErrorBoundary:', error);
     return { hasError: true, error };
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('Uncaught error:', error, errorInfo);
+    console.error('Uncaught error:', error);
+    console.error('Component stack:', errorInfo.componentStack);
+    this.setState({ errorInfo });
   }
 
   public render() {
@@ -32,14 +36,20 @@ class ErrorBoundary extends Component<Props, State> {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            minHeight: '400px',
+            minHeight: '100vh',
             p: 3,
-            textAlign: 'center'
+            textAlign: 'center',
+            bgcolor: '#f8fafc'
           }}
         >
-          <Typography variant="h5" gutterBottom>
+          <Typography variant="h5" gutterBottom color="error">
             Something went wrong
           </Typography>
+          {this.state.error && (
+            <Typography variant="body1" color="textSecondary" sx={{ mb: 2 }}>
+              {this.state.error.toString()}
+            </Typography>
+          )}
           <Button
             variant="contained"
             onClick={() => window.location.reload()}

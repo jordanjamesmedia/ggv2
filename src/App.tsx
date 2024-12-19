@@ -19,7 +19,7 @@ import ScrollToTop from './components/shared/ScrollToTop'
 import MobileCTA from './components/MobileCTA'
 import ThankYou from './components/ThankYou'
 
-function App() {
+const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

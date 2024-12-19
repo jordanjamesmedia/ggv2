@@ -20,10 +20,11 @@ export default defineConfig({
     port: 5173,
     strictPort: true
   },
-  assetsInclude: ['**/*.jpg', '**/*.png', '**/*.webp'],
+  assetsInclude: ['**/*.jpg', '**/*.png', '**/*.webp', '**/*.svg'],
   resolve: {
     alias: {
-      '@': path.resolve(process.cwd(), './src')
+      '@': path.resolve(process.cwd(), './src'),
+      '@assets': path.resolve(process.cwd(), './src/assets')
     }
   },
   root: '.',
@@ -31,12 +32,20 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     emptyOutDir: true,
+    assetsDir: 'assets',
     rollupOptions: {
       output: {
         manualChunks: {
           'mui': ['@mui/material'],
           'vendor': ['react', 'react-dom', 'react-router-dom'],
-        }
+        },
+        assetFileNames: (assetInfo) => {
+          let extType = assetInfo.name.split('.').at(1);
+          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
+            extType = 'img';
+          }
+          return `assets/${extType}/[name]-[hash][extname]`;
+        },
       }
     },
     chunkSizeWarningLimit: 1000,

@@ -4,6 +4,7 @@ import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { useNavigate } from 'react-router-dom'
 import { SERVICE_OPTIONS, ServiceOption } from '../../data/services'
+import AddressAutocomplete from '../AddressAutocomplete'
 
 const validationSchema = Yup.object({
   name: Yup.string().required('Name is required'),
@@ -38,6 +39,7 @@ export default function LeadForm() {
           access_key: '454855a9-c239-4927-ad3f-f626087fc12a',
           subject: `New Quote Request - ${values.service || 'General Inquiry'}`,
           from_name: 'Gutter Goat Website',
+          to_email: ['info@guttergoat.com.au', 'tyrell@guttergoat.com.au'],
           botcheck: '',
           name: values.name,
           email: values.email,
@@ -169,29 +171,23 @@ export default function LeadForm() {
             }}
           />
 
-          <TextField
+          <AddressAutocomplete
             fullWidth
             id="address"
             name="address"
             label="Address"
             value={values.address}
-            onChange={handleChange}
+            onChange={(address) => {
+              handleChange({
+                target: {
+                  name: 'address',
+                  value: address
+                }
+              } as React.ChangeEvent<HTMLInputElement>);
+            }}
             onBlur={handleBlur}
             error={touched.address && Boolean(errors.address)}
             helperText={touched.address && errors.address}
-            sx={{
-              '& .MuiOutlinedInput-root': {
-                '&:hover fieldset': {
-                  borderColor: '#4DD8E6',
-                },
-                '&.Mui-focused fieldset': {
-                  borderColor: '#4DD8E6',
-                },
-              },
-              '& .MuiInputLabel-root.Mui-focused': {
-                color: '#4DD8E6',
-              }
-            }}
           />
 
           <TextField
